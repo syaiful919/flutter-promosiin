@@ -23,4 +23,8 @@ class HomeViewModel extends BaseViewModel {
 
   void goToMultipleStreamSamplePage() =>
       _navigationService.pushNamed(Routes.multipleStreamSamplePage);
+
+  void goToInAppWebviewPage() => _navigationService.pushNamed(
+      Routes.inAppWebviewPage,
+      arguments: InAppWebviewPageArguments(redirectUrl: "https://google.com"));
 }

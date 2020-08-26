@@ -12,6 +12,7 @@ import 'package:base_project/ui/pages/stream_sample_page/stream_sample_page.dart
 import 'package:base_project/ui/pages/multiple_stream_sample_page/multiple_stream_sample_page.dart';
 import 'package:base_project/ui/pages/no_internet_page/no_internet_page.dart';
 import 'package:base_project/ui/pages/blank_page/blank_page.dart';
+import 'package:base_project/ui/pages/in_app_webview_page/in_app_webview_page.dart';
 
 abstract class Routes {
   static const homePage = '/';
@@ -19,12 +20,14 @@ abstract class Routes {
   static const multipleStreamSamplePage = '/multiple-stream-sample-page';
   static const noInternetPage = '/no-internet-page';
   static const blankPage = '/blank-page';
+  static const inAppWebviewPage = '/in-app-webview-page';
   static const all = {
     homePage,
     streamSamplePage,
     multipleStreamSamplePage,
     noInternetPage,
     blankPage,
+    inAppWebviewPage,
   };
 }
 
@@ -70,6 +73,16 @@ class Router extends RouterBase {
           builder: (context) => BlankPage(),
           settings: settings,
         );
+      case Routes.inAppWebviewPage:
+        if (hasInvalidArgs<InAppWebviewPageArguments>(args, isRequired: true)) {
+          return misTypedArgsRoute<InAppWebviewPageArguments>(args);
+        }
+        final typedArgs = args as InAppWebviewPageArguments;
+        return MaterialPageRoute<dynamic>(
+          builder: (context) =>
+              InAppWebviewPage(redirectUrl: typedArgs.redirectUrl),
+          settings: settings,
+        );
       default:
         return unknownRoutePage(settings.name);
     }
@@ -85,4 +98,10 @@ class NoInternetPageArguments {
   final dynamic routeName;
   final dynamic argument;
   NoInternetPageArguments({@required this.routeName, this.argument});
+}
+
+//InAppWebviewPage arguments holder class
+class InAppWebviewPageArguments {
+  final String redirectUrl;
+  InAppWebviewPageArguments({@required this.redirectUrl});
 }

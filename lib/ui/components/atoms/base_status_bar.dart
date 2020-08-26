@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 class BaseStatusBar extends StatelessWidget {
   final Widget child;
 
-  const BaseStatusBar({
-    Key key,
-    this.child,
-  }) : super(key: key);
+  const BaseStatusBar({this.child});
 
   @override
   Widget build(BuildContext context) {

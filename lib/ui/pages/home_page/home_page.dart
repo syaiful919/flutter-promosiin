@@ -25,13 +25,18 @@ class HomePage extends StatelessWidget {
                 ),
                 SizedBox(height: Gap.m),
                 BaseButton(
-                  title: "Go to Stream Sample Page",
+                  title: "Stream Sample Page",
                   onPressed: () => model.goToStreamSamplePage(),
                 ),
                 SizedBox(height: Gap.m),
                 BaseButton(
-                  title: "Go to Multiple Stream Sample Page",
+                  title: "Multiple Stream Sample Page",
                   onPressed: () => model.goToMultipleStreamSamplePage(),
+                ),
+                SizedBox(height: Gap.m),
+                BaseButton(
+                  title: "In App Webview Page",
+                  onPressed: () => model.goToInAppWebviewPage(),
                 )
               ],
             ),
