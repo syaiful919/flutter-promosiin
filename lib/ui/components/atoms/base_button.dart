@@ -17,7 +17,7 @@ class BaseButton extends StatelessWidget {
       padding: const EdgeInsets.all(Gap.s),
       elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(CornerSize.s),
+        borderRadius: BorderRadius.circular(RadiusSize.s),
       ),
       color: ProjectColor.main,
       disabledColor: ProjectColor.grey1,

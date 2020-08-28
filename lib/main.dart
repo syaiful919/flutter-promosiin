@@ -20,17 +20,27 @@ void main() async {
 class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: ProjectConfig.projectName,
-      theme: projectTheme,
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: Router().onGenerateRoute,
-      initialRoute: Routes.homePage,
-      navigatorKey: locator<NavigationService>().navigationKey,
-      builder: (context, widget) => Navigator(
-        onGenerateRoute: (settings) => MaterialPageRoute(
-          builder: (context) => Scaffold(
-            body: Builder(builder: (context) => widget),
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus &&
+            currentFocus.focusedChild != null) {
+          FocusManager.instance.primaryFocus.unfocus();
+        }
+      },
+      child: MaterialApp(
+        title: ProjectConfig.projectName,
+        theme: projectTheme,
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: Router().onGenerateRoute,
+        initialRoute: Routes.homePage,
+        navigatorKey: locator<NavigationService>().navigationKey,
+        builder: (context, widget) => Navigator(
+          onGenerateRoute: (settings) => MaterialPageRoute(
+            builder: (context) => Scaffold(
+              body: Builder(builder: (context) => widget),
+            ),
           ),
         ),
       ),
