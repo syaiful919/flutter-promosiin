@@ -53,6 +53,11 @@ class TypoStyle {
     color: ProjectColor.grey2,
     fontSize: TypoSize.paragraph,
   );
+  static const dialogTitle = TextStyle(
+    color: ProjectColor.black1,
+    fontSize: TypoSize.head,
+    fontWeight: FontWeight.w600,
+  );
 }
 
 class IconSize {

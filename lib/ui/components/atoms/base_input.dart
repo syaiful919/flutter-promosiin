@@ -64,17 +64,19 @@ class _BaseInputState extends State<BaseInput> {
           onChanged: (val) => widget.onChanged(val),
           onSubmitted: (val) => widget.onSubmitted(val),
           decoration: InputDecoration(
-            suffixIcon: GestureDetector(
-              onTap: () {
-                hideText = !hideText;
-                setState(() {});
-              },
-              child: Icon(
-                !hideText ? Icons.remove_red_eye : Icons.visibility_off,
-                color: ProjectColor.main,
-                size: IconSize.m,
-              ),
-            ),
+            suffixIcon: widget.passwordType
+                ? GestureDetector(
+                    onTap: () {
+                      hideText = !hideText;
+                      setState(() {});
+                    },
+                    child: Icon(
+                      !hideText ? Icons.remove_red_eye : Icons.visibility_off,
+                      color: ProjectColor.main,
+                      size: IconSize.m,
+                    ),
+                  )
+                : null,
             contentPadding:
                 const EdgeInsets.fromLTRB(Gap.m, Gap.s, Gap.m, Gap.s),
             hintText: widget.placeHolder,

@@ -4,29 +4,39 @@ import 'package:flutter/material.dart';
 class BaseButton extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
+  final bool outlineType;
 
   const BaseButton({
     Key key,
     this.title,
     this.onPressed,
+    this.outlineType = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      padding: const EdgeInsets.all(Gap.s),
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(RadiusSize.s),
+    return SizedBox(
+      height: 45,
+      child: MaterialButton(
+        padding: const EdgeInsets.symmetric(horizontal: Gap.s),
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(RadiusSize.s),
+          side: outlineType
+              ? BorderSide(color: ProjectColor.main)
+              : BorderSide.none,
+        ),
+        color: outlineType ? ProjectColor.white1 : ProjectColor.main,
+        disabledColor: ProjectColor.grey1,
+        minWidth: MediaQuery.of(context).size.width,
+        child: Text(
+          title,
+          style: outlineType
+              ? TypoStyle.mainButton.copyWith(color: ProjectColor.main)
+              : TypoStyle.mainButton,
+        ),
+        onPressed: (onPressed == null) ? null : () => onPressed(),
       ),
-      color: ProjectColor.main,
-      disabledColor: ProjectColor.grey1,
-      minWidth: MediaQuery.of(context).size.width,
-      child: Text(
-        title,
-        style: TypoStyle.mainButton,
-      ),
-      onPressed: (onPressed == null) ? null : () => onPressed(),
     );
   }
 }

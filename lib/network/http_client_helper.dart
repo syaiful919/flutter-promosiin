@@ -135,6 +135,9 @@ class HttpClientHelper {
     pref.remove(PrefKey.userToken);
   }
 
+  String baseAuthHelper(String username, String password) =>
+      "Basic " + base64Encode(utf8.encode('$username:$password'));
+
   dynamic _returnResponse(http.Response response) async {
     switch (response.statusCode) {
       case 200:

@@ -1,4 +1,5 @@
 import 'package:base_project/ui/components/atoms/base_button.dart';
+import 'package:base_project/ui/components/atoms/base_input.dart';
 import 'package:base_project/utils/project_theme.dart';
 import 'package:base_project/viewmodel/home_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,12 @@ class HomePage extends StatelessWidget {
                 BaseButton(
                   title: "In App Webview Page",
                   onPressed: () => model.goToInAppWebviewPage(),
-                )
+                ),
+                SizedBox(height: Gap.m),
+                BaseButton(
+                  title: "Show Dialog",
+                  onPressed: () => model.showMessageDialog(),
+                ),
               ],
             ),
           ),
