@@ -9,6 +9,8 @@ class ProjectColor {
   static const Color red2 = Color(0xfffb2f2f); // alert
   static const Color grey1 = Colors.grey;
   static const Color grey2 = Color(0xFFD5D5D5); // shadow
+  static const Color shimmer = Color(0xffe0e0e0);
+  static const Color shimmerHighlight = Color(0xfff5f5f5);
 }
 
 class Gap {

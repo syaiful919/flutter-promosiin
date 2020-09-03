@@ -30,15 +30,13 @@ class HomeViewModel extends BaseViewModel {
       arguments: InAppWebviewPageArguments(redirectUrl: "https://google.com"));
 
   void showMessageDialog() async {
-    var action = await Dialogs.yesNoDialog(
+    var action = await Dialogs.okDialog(
       context: pageContext,
       title: "Sorry...",
       subtitle: "Something wrong with our server, please try again later.",
     );
     if (action == DialogAction.yes) {
       print(">>> yes clicked");
-    } else if (action == DialogAction.no) {
-      print(">>> no clicked");
     } else {
       print(">>> else clicked");
     }
