@@ -1,4 +1,5 @@
 import 'package:base_project/locator/locator.dart';
+import 'package:base_project/service/fcm/fcm_service.dart';
 import 'package:base_project/service/navigation/navigation_service.dart';
 import 'package:base_project/service/navigation/router.gr.dart';
 import 'package:base_project/utils/config.dart';
@@ -17,7 +18,34 @@ void main() async {
   runApp(MainApp());
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
+  @override
+  _MainAppState createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  final fcmService = locator<FcmService>();
+
+  @override
+  void initState() {
+    super.initState();
+    configureFcm();
+  }
+
+  void configureFcm() async {
+    await fcmService.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        debugPrint('>>> onMessage: $message');
+      },
+      onResume: (Map<String, dynamic> message) async {
+        debugPrint('>>> onResume: $message');
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        debugPrint('>>> onLaunch: $message');
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
