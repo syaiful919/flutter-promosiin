@@ -44,6 +44,7 @@ dev_dependencies:
   injectable_generator: 
 
   flutter_launcher_icons: ^0.7.5
+  flutter_native_splash: ^0.1.9
 
 # launcher icon generator
 # run: flutter pub run flutter_launcher_icons:main
@@ -53,7 +54,13 @@ flutter_icons:
   image_path_android: "assets/logo/logo_transparent.png"
   image_path_ios: "assets/logo/logo_fill.png"
 
-
+# splash screen generator
+# run: flutter pub pub run flutter_native_splash:create
+flutter_native_splash:
+  image: assets/logo/logo_transparent.png
+  color: "#ffffff"
+  fill: false
+  android_disable_fullscreen: true
 
 # The following section is specific to Flutter.
 flutter:

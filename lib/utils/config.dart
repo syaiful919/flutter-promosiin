@@ -25,7 +25,7 @@ String apiKey() {
 
 String firebaseTopic() {
   if (ProjectConfig.useProd == true) {
-    return 'PROD_FIREBASE_TOPIC';
+    return 'testing';
   } else {
     return 'DEV_FIREBASE_TOPIC';
   }

@@ -44,6 +44,8 @@ class _MainAppState extends State<MainApp> {
         debugPrint('>>> onLaunch: $message');
       },
     );
+
+    fcmService.subscribeToTopic(firebaseTopic());
   }
 
   @override
