@@ -32,14 +32,28 @@ dependencies:
   shimmer: ^1.1.1
   flutter_html: ^1.0.0
   firebase_messaging: ^7.0.0
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  build_runner: null
-  auto_route_generator: null
-  injectable_generator: null
+  # run: flutter pub run build_runner build --delete-conflicting-outputs
+  build_runner: 
+  auto_route_generator: 
+  injectable_generator: 
+
+  flutter_launcher_icons: ^0.7.5
+
+# launcher icon generator
+# run: flutter pub run flutter_launcher_icons:main
+flutter_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path_android: "assets/logo/logo_transparent.png"
+  image_path_ios: "assets/logo/logo_fill.png"
+
+
 
 # The following section is specific to Flutter.
 flutter:
@@ -48,6 +62,8 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/logo/
+
 
   fonts:
     - family: Poppins
