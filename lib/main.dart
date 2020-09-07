@@ -1,11 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'package:base_project/locator/locator.dart';
 import 'package:base_project/service/fcm/fcm_service.dart';
+import 'package:base_project/service/local_notification/local_notification_service.dart';
 import 'package:base_project/service/navigation/navigation_service.dart';
 import 'package:base_project/service/navigation/router.gr.dart';
 import 'package:base_project/utils/config.dart';
 import 'package:base_project/utils/project_theme.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,27 +27,13 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   final fcmService = locator<FcmService>();
+  final localNotificationService = locator<LocalNotificationService>();
 
   @override
   void initState() {
     super.initState();
     configureFcm();
-  }
-
-  void configureFcm() async {
-    await fcmService.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        debugPrint('>>> onMessage: $message');
-      },
-      onResume: (Map<String, dynamic> message) async {
-        debugPrint('>>> onResume: $message');
-      },
-      onLaunch: (Map<String, dynamic> message) async {
-        debugPrint('>>> onLaunch: $message');
-      },
-    );
-
-    fcmService.subscribeToTopic(firebaseTopic());
+    configureLocalNotification();
   }
 
   @override
@@ -75,5 +63,53 @@ class _MainAppState extends State<MainApp> {
         ),
       ),
     );
+  }
+
+  void configureFcm() async {
+    await fcmService.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        debugPrint(">>> notificatin payload: ${message['data']}");
+        try {
+          localNotificationService.showNotification(
+            id: int.parse(message['data']['id']),
+            title: message['notification']['title'],
+            body: message['notification']['body'],
+            payload: message['data'].toString(),
+          );
+        } catch (e) {
+          debugPrint(">>> error $e");
+        }
+      },
+      onResume: (Map<String, dynamic> message) async {
+        debugPrint('>>> onResume: $message');
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        debugPrint('>>> onLaunch: $message');
+      },
+    );
+
+    fcmService.subscribeToTopic(firebaseTopic());
+  }
+
+  void configureLocalNotification() async {
+    await localNotificationService.initialize(
+      onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+      onSelectNotification: onSelectNotification,
+    );
+  }
+
+  Future<void> onDidReceiveLocalNotification(
+    int id,
+    String title,
+    String body,
+    String payload,
+  ) async {
+    debugPrint(">>> onDidReceiveLocalNotification");
+  }
+
+  Future<void> onSelectNotification(String payload) async {
+    if (payload != null) {
+      debugPrint(">>> onSelectNotification: $payload");
+    }
   }
 }

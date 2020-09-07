@@ -1,6 +1,7 @@
 import 'package:base_project/repository/shopping_cart_repository.dart';
 import 'package:base_project/service/connectivity/connectivity_service.dart';
 import 'package:base_project/service/fcm/fcm_service.dart';
+import 'package:base_project/service/local_notification/local_notification_service.dart';
 import 'package:base_project/service/navigation/navigation_service.dart';
 import 'package:base_project/network/http_client_helper.dart';
 import 'package:base_project/repository/member_repository.dart';
@@ -20,6 +21,8 @@ Future<void> setupLocator() async {
   locator.registerSingleton<UrlLauncherService>(UrlLauncherService());
   locator.registerSingleton<ConnectivityService>(ConnectivityService());
   locator.registerSingleton<FcmService>(FcmService());
+  locator
+      .registerSingleton<LocalNotificationService>(LocalNotificationService());
 
   locator.registerSingleton<HttpClientHelper>(HttpClientHelper());
 
