@@ -1,4 +1,5 @@
 import 'package:base_project/ui/components/atoms/base_status_bar.dart';
+import 'package:base_project/ui/pages/widget_experiment_page/examples/image_picker_example.dart';
 import 'package:base_project/ui/pages/widget_experiment_page/examples/video_example.dart';
 import 'package:base_project/ui/pages/widget_experiment_page/examples/youtube_example.dart';
 import 'package:base_project/viewmodel/widget_experiment_viewmodel.dart';
@@ -13,15 +14,7 @@ class WidgetExperimentPage extends StatelessWidget {
       viewModelBuilder: () => WidgetExperimentViewModel(),
       builder: (_, model, __) => BaseStatusBar(
         child: Scaffold(
-          body: Container(
-            child: ListView(
-              shrinkWrap: true,
-              children: <Widget>[
-                VideoExample(),
-                YoutubeExample(),
-              ],
-            ),
-          ),
+          body: ImagePickerExample(),
         ),
       ),
     );
