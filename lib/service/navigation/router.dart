@@ -5,6 +5,7 @@ import 'package:base_project/ui/pages/in_app_webview_page/in_app_webview_page.da
 import 'package:base_project/ui/pages/multiple_stream_sample_page/multiple_stream_sample_page.dart';
 import 'package:base_project/ui/pages/no_internet_page/no_internet_page.dart';
 import 'package:base_project/ui/pages/stream_sample_page/stream_sample_page.dart';
+import 'package:base_project/ui/pages/widget_experiment_page/widget_experiment_page.dart';
 
 @MaterialAutoRouter()
 class $Router {
@@ -15,4 +16,5 @@ class $Router {
   NoInternetPage noInternetPage;
   BlankPage blankPage;
   InAppWebviewPage inAppWebviewPage;
+  WidgetExperimentPage widgetExperimentPage;
 }

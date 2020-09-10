@@ -27,12 +27,17 @@ dependencies:
   device_info: ^0.4.2+7
   url_launcher: ^5.5.0
   connectivity: ^0.4.9+2
-  flutter_svg: ^0.17.4
   flutter_inappwebview: ^4.0.0+4
-  shimmer: ^1.1.1
-  flutter_html: ^1.0.0
   firebase_messaging: ^7.0.0
   flutter_local_notifications: ^1.4.4+4
+
+  # UI
+  flutter_svg: ^0.17.4
+  shimmer: ^1.1.1
+  flutter_html: ^1.0.0
+  video_player: ^0.10.12+2
+  chewie: ^0.9.10
+  youtube_player_flutter: ^7.0.0+7
   
 
 dev_dependencies:
@@ -71,6 +76,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/logo/
+    - assets/videos/
 
 
   fonts:

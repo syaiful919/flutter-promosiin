@@ -29,6 +29,9 @@ class HomeViewModel extends BaseViewModel {
       Routes.inAppWebviewPage,
       arguments: InAppWebviewPageArguments(redirectUrl: "https://google.com"));
 
+  void goToWidgetExperimentPage() =>
+      _navigationService.pushNamed(Routes.widgetExperimentPage);
+
   void showMessageDialog() async {
     var action = await Dialogs.okDialog(
       context: pageContext,

@@ -22,6 +22,7 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
+                    SizedBox(height: Gap.m),
                     Text(
                       "Home Page",
                       style: TypoStyle.sectionLabel.copyWith(
@@ -42,6 +43,11 @@ class HomePage extends StatelessWidget {
                     BaseButton(
                       title: "In App Webview Page",
                       onPressed: () => model.goToInAppWebviewPage(),
+                    ),
+                    SizedBox(height: Gap.m),
+                    BaseButton(
+                      title: "Widget Experiment Page",
+                      onPressed: () => model.goToWidgetExperimentPage(),
                     ),
                     SizedBox(height: Gap.m),
                     BaseButton(
