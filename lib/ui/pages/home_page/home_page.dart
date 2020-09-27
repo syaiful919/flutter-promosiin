@@ -1,7 +1,8 @@
-import 'package:base_project/ui/components/atoms/base_button.dart';
-import 'package:base_project/ui/components/atoms/base_input.dart';
+import 'package:base_project/locator/locator.dart';
+import 'package:base_project/model/entity/post_model.dart';
 import 'package:base_project/ui/components/atoms/base_status_bar.dart';
 import 'package:base_project/ui/components/atoms/shimmer_placeholder.dart';
+import 'package:base_project/ui/components/molecules/post_card.dart';
 import 'package:base_project/utils/project_theme.dart';
 import 'package:base_project/viewmodel/home_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +12,11 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       ViewModelBuilder<HomeViewModel>.reactive(
+        disposeViewModel: false,
+        initialiseSpecialViewModelsOnce: true,
+        fireOnModelReadyOnce: true,
         onModelReady: (model) => model.firstLoad(context: context),
-        viewModelBuilder: () => HomeViewModel(),
+        viewModelBuilder: () => locator<HomeViewModel>(),
         builder: (_, model, __) => BaseStatusBar(
           child: Scaffold(
             body: SingleChildScrollView(
@@ -24,36 +28,27 @@ class HomePage extends StatelessWidget {
                   children: <Widget>[
                     SizedBox(height: Gap.m),
                     Text(
-                      "Home Page",
+                      "Promosiin",
                       style: TypoStyle.sectionLabel.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     SizedBox(height: Gap.m),
-                    BaseButton(
-                      title: "Stream Sample Page",
-                      onPressed: () => model.goToStreamSamplePage(),
-                    ),
-                    SizedBox(height: Gap.m),
-                    BaseButton(
-                      title: "Multiple Stream Sample Page",
-                      onPressed: () => model.goToMultipleStreamSamplePage(),
-                    ),
-                    SizedBox(height: Gap.m),
-                    BaseButton(
-                      title: "In App Webview Page",
-                      onPressed: () => model.goToInAppWebviewPage(),
-                    ),
-                    SizedBox(height: Gap.m),
-                    BaseButton(
-                      title: "Widget Experiment Page",
-                      onPressed: () => model.goToWidgetExperimentPage(),
-                    ),
-                    SizedBox(height: Gap.m),
-                    BaseButton(
-                      title: "Show Dialog",
-                      onPressed: () => model.showMessageDialog(),
-                    ),
+                    if (model.newPost != null)
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (_, index) => PostCard(
+                          post: model.newPost[index],
+                          saveAction: (val) {
+                            print(">>> save");
+                          },
+                          detailAction: (val) {
+                            print(">>> detail");
+                          },
+                        ),
+                        itemCount: model.newPost.length,
+                      )
                   ],
                 ),
               ),

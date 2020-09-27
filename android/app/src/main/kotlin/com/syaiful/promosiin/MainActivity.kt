@@ -1,4 +1,4 @@
-package com.syaiful.base_project
+package com.syaiful.promosiin
 
 import io.flutter.embedding.android.FlutterActivity
 

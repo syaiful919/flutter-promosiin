@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -32,8 +33,7 @@ class _MainAppState extends State<MainApp> {
   @override
   void initState() {
     super.initState();
-    configureFcm();
-    configureLocalNotification();
+    initializePlugin();
   }
 
   @override
@@ -52,7 +52,7 @@ class _MainAppState extends State<MainApp> {
         theme: projectTheme,
         debugShowCheckedModeBanner: false,
         onGenerateRoute: Router().onGenerateRoute,
-        initialRoute: Routes.homePage,
+        initialRoute: Routes.mainPage,
         navigatorKey: locator<NavigationService>().navigationKey,
         builder: (context, widget) => Navigator(
           onGenerateRoute: (settings) => MaterialPageRoute(
@@ -63,6 +63,15 @@ class _MainAppState extends State<MainApp> {
         ),
       ),
     );
+  }
+
+  void initializePlugin() async {
+    try {
+      configureFcm();
+      configureLocalNotification();
+    } catch (e) {
+      print(">>> firebase init error $e");
+    }
   }
 
   void configureFcm() async {

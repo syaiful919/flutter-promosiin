@@ -5,18 +5,22 @@ class BaseButton extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
   final bool outlineType;
+  final bool isLoading;
+  final bool disabled;
 
   const BaseButton({
     Key key,
     this.title,
     this.onPressed,
     this.outlineType = false,
+    this.isLoading = false,
+    this.disabled = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 45,
+      height: 40,
       child: MaterialButton(
         padding: const EdgeInsets.symmetric(horizontal: Gap.s),
         elevation: 0,
@@ -29,13 +33,26 @@ class BaseButton extends StatelessWidget {
         color: outlineType ? ProjectColor.white1 : ProjectColor.main,
         disabledColor: ProjectColor.grey1,
         minWidth: MediaQuery.of(context).size.width,
-        child: Text(
-          title,
-          style: outlineType
-              ? TypoStyle.mainButton.copyWith(color: ProjectColor.main)
-              : TypoStyle.mainButton,
-        ),
-        onPressed: (onPressed == null) ? null : () => onPressed(),
+        child: isLoading
+            ? SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(
+                  valueColor:
+                      AlwaysStoppedAnimation<Color>(ProjectColor.white1),
+                ),
+              )
+            : Text(
+                title,
+                style: outlineType
+                    ? TypoStyle.mainButton.copyWith(color: ProjectColor.main)
+                    : TypoStyle.mainButton,
+              ),
+        onPressed: (onPressed == null)
+            ? null
+            : () {
+                if (!isLoading && !disabled) onPressed();
+              },
       ),
     );
   }

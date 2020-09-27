@@ -7,28 +7,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:base_project/ui/pages/home_page/home_page.dart';
-import 'package:base_project/ui/pages/stream_sample_page/stream_sample_page.dart';
-import 'package:base_project/ui/pages/multiple_stream_sample_page/multiple_stream_sample_page.dart';
+import 'package:base_project/ui/pages/main_page/main_page.dart';
+import 'package:base_project/ui/pages/create_post_page/create_post_page.dart';
+import 'package:base_project/ui/pages/login_page/login_page.dart';
+import 'package:base_project/ui/pages/register_page/register_page.dart';
+import 'package:base_project/ui/pages/post_detail_page/post_detail_page.dart';
 import 'package:base_project/ui/pages/no_internet_page/no_internet_page.dart';
-import 'package:base_project/ui/pages/blank_page/blank_page.dart';
 import 'package:base_project/ui/pages/in_app_webview_page/in_app_webview_page.dart';
 import 'package:base_project/ui/pages/widget_experiment_page/widget_experiment_page.dart';
 
 abstract class Routes {
-  static const homePage = '/';
-  static const streamSamplePage = '/stream-sample-page';
-  static const multipleStreamSamplePage = '/multiple-stream-sample-page';
+  static const mainPage = '/';
+  static const createPostPage = '/create-post-page';
+  static const loginPage = '/login-page';
+  static const registerPage = '/register-page';
+  static const postDetailPage = '/post-detail-page';
   static const noInternetPage = '/no-internet-page';
-  static const blankPage = '/blank-page';
   static const inAppWebviewPage = '/in-app-webview-page';
   static const widgetExperimentPage = '/widget-experiment-page';
   static const all = {
-    homePage,
-    streamSamplePage,
-    multipleStreamSamplePage,
+    mainPage,
+    createPostPage,
+    loginPage,
+    registerPage,
+    postDetailPage,
     noInternetPage,
-    blankPage,
     inAppWebviewPage,
     widgetExperimentPage,
   };
@@ -46,19 +49,34 @@ class Router extends RouterBase {
   Route<dynamic> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
-      case Routes.homePage:
+      case Routes.mainPage:
+        if (hasInvalidArgs<MainPageArguments>(args)) {
+          return misTypedArgsRoute<MainPageArguments>(args);
+        }
+        final typedArgs = args as MainPageArguments ?? MainPageArguments();
         return MaterialPageRoute<dynamic>(
-          builder: (context) => HomePage(),
+          builder: (context) => MainPage(
+              key: typedArgs.key, initialIndex: typedArgs.initialIndex),
           settings: settings,
         );
-      case Routes.streamSamplePage:
+      case Routes.createPostPage:
         return MaterialPageRoute<dynamic>(
-          builder: (context) => StreamSamplePage(),
+          builder: (context) => CreatePostPage(),
           settings: settings,
         );
-      case Routes.multipleStreamSamplePage:
+      case Routes.loginPage:
         return MaterialPageRoute<dynamic>(
-          builder: (context) => MultipleStreamSamplePage(),
+          builder: (context) => LoginPage(),
+          settings: settings,
+        );
+      case Routes.registerPage:
+        return MaterialPageRoute<dynamic>(
+          builder: (context) => RegisterPage(),
+          settings: settings,
+        );
+      case Routes.postDetailPage:
+        return MaterialPageRoute<dynamic>(
+          builder: (context) => PostDetailPage(),
           settings: settings,
         );
       case Routes.noInternetPage:
@@ -69,11 +87,6 @@ class Router extends RouterBase {
         return MaterialPageRoute<dynamic>(
           builder: (context) =>
               NoInternetPage(typedArgs.routeName, argument: typedArgs.argument),
-          settings: settings,
-        );
-      case Routes.blankPage:
-        return MaterialPageRoute<dynamic>(
-          builder: (context) => BlankPage(),
           settings: settings,
         );
       case Routes.inAppWebviewPage:
@@ -100,6 +113,13 @@ class Router extends RouterBase {
 // *************************************************************************
 // Arguments holder classes
 // **************************************************************************
+
+//MainPage arguments holder class
+class MainPageArguments {
+  final Key key;
+  final int initialIndex;
+  MainPageArguments({this.key, this.initialIndex = 0});
+}
 
 //NoInternetPage arguments holder class
 class NoInternetPageArguments {

@@ -105,6 +105,7 @@ class BaseDialog extends StatelessWidget {
             if (title != null)
               Text(
                 title,
+                textAlign: TextAlign.center,
                 style: TypoStyle.dialogTitle,
               ),
             if (title != null) SizedBox(height: Gap.m),

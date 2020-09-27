@@ -1,20 +1,20 @@
 import 'package:base_project/ui/components/atoms/base_status_bar.dart';
 import 'package:base_project/ui/components/molecules/detail_appbar.dart';
 import 'package:base_project/utils/project_theme.dart';
-import 'package:base_project/viewmodel/stream_sample_viewmodel.dart';
+import 'package:base_project/viewmodel/post_detail_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-class StreamSamplePage extends StatelessWidget {
+class PostDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<StreamSampleViewModel>.reactive(
+    return ViewModelBuilder<PostDetailViewModel>.reactive(
       onModelReady: (model) => model.firstLoad(context: context),
-      viewModelBuilder: () => StreamSampleViewModel(),
+      viewModelBuilder: () => PostDetailViewModel(),
       builder: (_, model, __) => BaseStatusBar(
         child: Scaffold(
           appBar: DetailAppBar(
-            title: "Stream Sample Page",
+            title: "Post Detail Page",
             backAction: () => model.goBack(),
           ),
           body: Container(
