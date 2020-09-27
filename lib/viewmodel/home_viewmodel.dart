@@ -26,6 +26,9 @@ class HomeViewModel extends BaseViewModel {
     try {
       List<PostModel> result = await _postRepository.getNewPosts();
       newPost = result;
+      newPost.forEach((element) {
+        print(">>> date ${element.dateCreated}");
+      });
     } catch (e) {
       print(">>> error: $e");
     } finally {

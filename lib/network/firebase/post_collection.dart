@@ -1,6 +1,5 @@
 import 'package:base_project/locator/locator.dart';
 import 'package:base_project/model/entity/post_model.dart';
-import 'package:base_project/service/uuid/uuid_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
@@ -31,11 +30,15 @@ class PostCollection {
     int limit = 20,
   }) async {
     try {
-      var result = await postCollection.limit(limit).get();
+      var result = await postCollection
+          .orderBy("date_created", descending: true)
+          .limit(limit)
+          .get();
       List<PostModel> posts = [];
       result.docs.forEach((element) {
         posts.add(PostModel.fromJson(element.data()));
       });
+
       return posts;
     } catch (e) {
       print(">>> error: $e");

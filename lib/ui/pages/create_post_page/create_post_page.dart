@@ -75,6 +75,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   controller: descriptionController,
                   placeHolder: "Deskripsi",
                   onChanged: (val) => model.changeDescription(val),
+                  minLines: 2,
+                  maxLines: 5,
                 ),
                 SizedBox(height: Gap.m),
                 Text("Kategori"),

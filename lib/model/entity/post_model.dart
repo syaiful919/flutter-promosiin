@@ -1,10 +1,7 @@
-// To parse this JSON data, do
-//
-//     final postModel = postModelFromJson(jsonString);
-
 import 'dart:convert';
 
 import 'package:base_project/model/entity/category_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 PostModel postModelFromJson(String str) => PostModel.fromJson(json.decode(str));
 
@@ -19,6 +16,7 @@ class PostModel {
     this.imagePath,
     this.externalLink,
     this.userId,
+    this.dateCreated,
   });
 
   String postId;
@@ -28,6 +26,7 @@ class PostModel {
   String imagePath;
   List<ExternalLink> externalLink;
   String userId;
+  DateTime dateCreated;
 
   factory PostModel.fromJson(Map<String, dynamic> json) => PostModel(
         postId: json["post_id"] == null ? null : json["post_id"],
@@ -42,6 +41,9 @@ class PostModel {
             : List<ExternalLink>.from(
                 json["external_link"].map((x) => ExternalLink.fromJson(x))),
         userId: json["user_id"] == null ? null : json["user_id"],
+        dateCreated: json["date_created"] == null
+            ? null
+            : (json["date_created"] as Timestamp).toDate(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -54,6 +56,8 @@ class PostModel {
             ? null
             : List<dynamic>.from(externalLink.map((x) => x.toJson())),
         "user_id": userId == null ? null : userId,
+        "date_created":
+            dateCreated == null ? null : Timestamp.fromDate(dateCreated),
       };
 }
 
