@@ -2,6 +2,7 @@ import 'package:base_project/model/entity/category_model.dart';
 import 'package:base_project/model/entity/promotion_model.dart';
 import 'package:base_project/ui/components/atoms/base_status_bar.dart';
 import 'package:base_project/ui/components/molecules/detail_appbar.dart';
+import 'package:base_project/ui/components/molecules/empty_content.dart';
 import 'package:base_project/ui/components/molecules/post_card.dart';
 import 'package:base_project/utils/project_theme.dart';
 import 'package:base_project/viewmodel/category_viewmodel.dart';
@@ -30,24 +31,39 @@ class CategoryPage extends StatelessWidget {
       builder: (_, model, __) => BaseStatusBar(
         child: Scaffold(
           appBar: DetailAppBar(
-            title: "Stream Sample Page",
+            title: model.category?.name ?? model.promotion?.name ?? "",
             backAction: () => model.goBack(),
           ),
-          body: (model.posts != null && model.posts.length > 0)
-              ? ListView.builder(
-                  shrinkWrap: true,
-                  key: PageStorageKey("new-key"),
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (_, index) => PostCard(
-                    post: model.posts[index],
-                    saveAction: (val) {
-                      print(">>> save");
-                    },
-                    detailAction: (val) => model.goToPostDetailPage(val),
+          body: (model.posts == null)
+              ? Container(
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(ProjectColor.main),
                   ),
-                  itemCount: model.posts.length,
                 )
-              : Container(),
+              : (model.posts.length > 0)
+                  ? ListView(
+                      children: <Widget>[
+                        SizedBox(height: Gap.m),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemBuilder: (_, index) => PostCard(
+                            post: model.posts[index],
+                            saveAction: (val) {
+                              print(">>> save");
+                            },
+                            detailAction: (val) =>
+                                model.goToPostDetailPage(val),
+                            userAction: (id, user) =>
+                                model.goToUserPostPage(id, user),
+                          ),
+                          itemCount: model.posts.length,
+                        ),
+                      ],
+                    )
+                  : EmptyContent(),
         ),
       ),
     );

@@ -14,7 +14,7 @@ class PromotionsSection extends HookViewModelWidget<HomeViewModel> {
     var currentIndex = useState(0);
     return SliverToBoxAdapter(
       child: (model.promotions == null)
-          ? ShimmerPlaceholder.block(itemHeight: 150)
+          ? Container()
           : Container(
               width: MediaQuery.of(context).size.width,
               child: Stack(
@@ -29,29 +29,34 @@ class PromotionsSection extends HookViewModelWidget<HomeViewModel> {
                       enableInfiniteScroll: true,
                     ),
                     itemCount: model.promotions.length,
-                    itemBuilder: (_, index) => Container(
-                      decoration: BoxDecoration(
-                        border:
-                            Border.all(color: ProjectColor.main, width: 0.5),
-                        borderRadius: BorderRadius.circular(RadiusSize.l),
-                        image: DecorationImage(
-                          image:
-                              NetworkImage(model.promotions[index].bannerPath),
-                          fit: BoxFit.cover,
-                        ),
+                    itemBuilder: (_, index) => GestureDetector(
+                      onTap: () => model.goToCategoryPage(
+                        promo: model.promotions[index],
                       ),
-                      alignment: Alignment.bottomRight,
-                      padding: EdgeInsets.only(bottom: Gap.s, right: Gap.s),
                       child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: Gap.s, vertical: Gap.xxs),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(RadiusSize.m),
-                          color: ProjectColor.main.withOpacity(0.75),
+                          border:
+                              Border.all(color: ProjectColor.main, width: 0.5),
+                          borderRadius: BorderRadius.circular(RadiusSize.l),
+                          image: DecorationImage(
+                            image: NetworkImage(
+                                model.promotions[index].bannerPath),
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        child: Text(
-                          model.promotions[index].name,
-                          style: TypoStyle.small500,
+                        alignment: Alignment.bottomRight,
+                        padding: EdgeInsets.only(bottom: Gap.s, right: Gap.s),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: Gap.s, vertical: Gap.xxs),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(RadiusSize.m),
+                            color: ProjectColor.main.withOpacity(0.75),
+                          ),
+                          child: Text(
+                            model.promotions[index].name,
+                            style: TypoStyle.small500,
+                          ),
                         ),
                       ),
                     ),

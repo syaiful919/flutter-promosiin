@@ -25,6 +25,7 @@ class NewPostsSection extends ViewModelWidget<HomeViewModel> {
                       print(">>> save");
                     },
                     detailAction: (val) => model.goToPostDetailPage(val),
+                    userAction: (id, user) => model.goToUserPostPage(id, user),
                   ),
                   itemCount: model.newPost.length,
                 ),

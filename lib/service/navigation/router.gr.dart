@@ -16,6 +16,8 @@ import 'package:base_project/model/entity/post_model.dart';
 import 'package:base_project/ui/pages/category_page/category_page.dart';
 import 'package:base_project/model/entity/category_model.dart';
 import 'package:base_project/model/entity/promotion_model.dart';
+import 'package:base_project/ui/pages/user_post_page/user_post_page.dart';
+import 'package:base_project/model/entity/user_model.dart';
 import 'package:base_project/ui/pages/no_internet_page/no_internet_page.dart';
 import 'package:base_project/ui/pages/in_app_webview_page/in_app_webview_page.dart';
 import 'package:base_project/ui/pages/widget_experiment_page/widget_experiment_page.dart';
@@ -27,6 +29,7 @@ abstract class Routes {
   static const registerPage = '/register-page';
   static const postDetailPage = '/post-detail-page';
   static const categoryPage = '/category-page';
+  static const userPostPage = '/user-post-page';
   static const noInternetPage = '/no-internet-page';
   static const inAppWebviewPage = '/in-app-webview-page';
   static const widgetExperimentPage = '/widget-experiment-page';
@@ -37,6 +40,7 @@ abstract class Routes {
     registerPage,
     postDetailPage,
     categoryPage,
+    userPostPage,
     noInternetPage,
     inAppWebviewPage,
     widgetExperimentPage,
@@ -103,6 +107,18 @@ class Router extends RouterBase {
               promotion: typedArgs.promotion),
           settings: settings,
         );
+      case Routes.userPostPage:
+        if (hasInvalidArgs<UserPostPageArguments>(args, isRequired: true)) {
+          return misTypedArgsRoute<UserPostPageArguments>(args);
+        }
+        final typedArgs = args as UserPostPageArguments;
+        return MaterialPageRoute<dynamic>(
+          builder: (context) => UserPostPage(
+              key: typedArgs.key,
+              userId: typedArgs.userId,
+              user: typedArgs.user),
+          settings: settings,
+        );
       case Routes.noInternetPage:
         if (hasInvalidArgs<NoInternetPageArguments>(args, isRequired: true)) {
           return misTypedArgsRoute<NoInternetPageArguments>(args);
@@ -158,6 +174,14 @@ class CategoryPageArguments {
   final CategoryModel category;
   final PromotionModel promotion;
   CategoryPageArguments({this.key, this.category, this.promotion});
+}
+
+//UserPostPage arguments holder class
+class UserPostPageArguments {
+  final Key key;
+  final String userId;
+  final UserModel user;
+  UserPostPageArguments({this.key, @required this.userId, this.user});
 }
 
 //NoInternetPage arguments holder class

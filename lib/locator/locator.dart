@@ -41,7 +41,7 @@ Future<void> setupLocator() async {
 
   locator.registerLazySingleton<ImagePickerService>(() => ImagePickerService());
 
-  locator.registerLazySingleton<MemberRepository>(() => MemberRepository());
+  locator.registerSingleton<MemberRepository>(MemberRepository());
   locator.registerLazySingleton<PostRepository>(() => PostRepository());
   locator.registerLazySingleton<CategoryRepository>(() => CategoryRepository());
   locator

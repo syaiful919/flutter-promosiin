@@ -13,4 +13,10 @@ class ProjectIcons {
   static const String homeDisabled = 'assets/icons/home_disabled.svg';
   static const String user = 'assets/icons/user.svg';
   static const String userDisabled = 'assets/icons/user_disabled.svg';
+
+  static const String edit = 'assets/icons/edit.svg';
+  static const String post = 'assets/icons/post.svg';
+
+  static const String rate = 'assets/icons/rate.svg';
+  static const String logout = 'assets/icons/logout.svg';
 }

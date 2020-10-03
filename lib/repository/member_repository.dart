@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:base_project/locator/locator.dart';
 import 'package:base_project/model/entity/user_model.dart';
 import 'package:base_project/model/request/login_request_model.dart';
@@ -37,20 +39,35 @@ class MemberRepository {
       email: registerRequest.email,
       password: registerRequest.password,
     );
+    _collection.createUser(
+      id: authResult.userId,
+      user: UserModel(
+        email: registerRequest.email,
+        username: registerRequest.username,
+      ),
+    );
     return authResult;
   }
 
-  Future<UserModel> getUserData(String id) => _collection.getUserById(id: id);
+  Future<UserModel> getUserDataRemote(String id) =>
+      _collection.getUserById(id: id);
 
   Future<void> logOut() async {
     await _authService.signOut();
     removeUserId();
+    removeUserData();
     setIsLogin(false);
   }
 
   void saveUserId(String userId) => _sp.putString(PrefKey.userId, userId);
   String getUserId() => _sp.getString(PrefKey.userId);
   void removeUserId() => _sp.clearKey(PrefKey.userId);
+
+  void saveUserData(UserModel userData) =>
+      _sp.putString(PrefKey.userData, json.encode(userData.toJson()));
+  UserModel getUserData() =>
+      UserModel.fromJson(json.decode(_sp.getString(PrefKey.userData)));
+  void removeUserData() => _sp.clearKey(PrefKey.userData);
 
   void saveUserToken(String userToken) =>
       _sp.putString(PrefKey.userToken, userToken);

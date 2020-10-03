@@ -83,7 +83,11 @@ class MainViewModel extends StreamViewModel {
 
   void checkLoginStatus() {
     setUserId();
-    if (userId == null) setUserNotLogin();
+    if (userId == null) {
+      setUserNotLogin();
+    } else {
+      _memberRepository.setIsLogin(true);
+    }
   }
 
   setUserId() => userId = _memberRepository.getUserId();

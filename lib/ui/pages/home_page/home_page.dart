@@ -1,5 +1,6 @@
 import 'package:base_project/locator/locator.dart';
 import 'package:base_project/ui/components/atoms/base_status_bar.dart';
+import 'package:base_project/ui/components/molecules/no_internet_content.dart';
 import 'package:base_project/ui/pages/home_page/sections/categories_section.dart';
 import 'package:base_project/ui/pages/home_page/sections/header_section.dart';
 import 'package:base_project/ui/pages/home_page/sections/new_posts_section.dart';
@@ -18,20 +19,19 @@ class HomePage extends StatelessWidget {
         fireOnModelReadyOnce: true,
         onModelReady: (model) => model.firstLoad(context: context),
         viewModelBuilder: () => locator<HomeViewModel>(),
-        builder: (_, model, __) => BaseStatusBar(
-          child: Scaffold(
+        builder: (_, model, __) => Scaffold(
             backgroundColor: ProjectColor.white2,
-            body: CustomScrollView(
-              key: PageStorageKey("home-key"),
-              slivers: <Widget>[
-                Header(),
-                PromotionsSection(),
-                CategoriesSection(),
-                NewPostsSection(),
-                SliverPadding(padding: EdgeInsets.only(top: Gap.xxl))
-              ],
-            ),
-          ),
-        ),
+            body: (model.isNetworkError)
+                ? NoInternetContent(ctaAction: () => model.firstLoad())
+                : CustomScrollView(
+                    key: PageStorageKey("home-key"),
+                    slivers: <Widget>[
+                      Header(),
+                      PromotionsSection(),
+                      CategoriesSection(),
+                      NewPostsSection(),
+                      SliverPadding(padding: EdgeInsets.only(top: Gap.xxl))
+                    ],
+                  )),
       );
 }

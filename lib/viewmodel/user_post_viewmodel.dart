@@ -5,6 +5,7 @@ import 'package:base_project/model/entity/category_model.dart';
 import 'package:base_project/model/entity/post_model.dart';
 import 'package:base_project/model/entity/promotion_model.dart';
 import 'package:base_project/model/entity/user_model.dart';
+import 'package:base_project/repository/member_repository.dart';
 import 'package:base_project/repository/post_repository.dart';
 import 'package:base_project/service/connectivity/connectivity_service.dart';
 import 'package:base_project/service/connectivity/connectivity_status.dart';
@@ -12,59 +13,53 @@ import 'package:base_project/service/navigation/navigation_service.dart';
 import 'package:base_project/service/navigation/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:base_project/extension/extended_string.dart';
 
-class CategoryViewModel extends StreamViewModel {
+class UserPostViewModel extends StreamViewModel {
   final _navigationService = locator<NavigationService>();
   final _connectivityService = locator<ConnectivityService>();
   final _postRepository = locator<PostRepository>();
+  final _memberRepository = locator<MemberRepository>();
 
   BuildContext pageContext;
 
   List<PostModel> posts;
-  CategoryModel category;
-  PromotionModel promotion;
+  String userId;
+  UserModel user;
+
+  String currentUserId;
+  String appBarTitle = "";
+
+  bool isNetworkError = false;
 
   Future<void> firstLoad({
-    BuildContext context,
-    CategoryModel cat,
-    PromotionModel promo,
+    @required BuildContext context,
+    @required String id,
+    UserModel usr,
   }) async {
     if (pageContext == null && context != null) pageContext = context;
+    if (userId == null && id != null) userId = id;
+    if (user == null && usr != null) user = usr;
+    runBusyFuture(getUserId());
+    runBusyFuture(getUserPost());
+    isNetworkError = false;
+  }
 
-    if (cat != null) {
-      category = cat;
-      runBusyFuture(getPostByCategory());
-    }
-
-    if (promo != null) {
-      promotion = promo;
-      runBusyFuture(getPostByTag());
+  Future<void> getUserId() async {
+    currentUserId = _memberRepository.getUserId();
+    if (currentUserId == userId) {
+      appBarTitle = "My Post";
+    } else {
+      appBarTitle = user?.username == null
+          ? "My Post"
+          : "Postingan ${user.username.capitalize()}";
     }
   }
 
-  Future<void> getPostByCategory() async {
+  Future<void> getUserPost() async {
     try {
-      List<PostModel> result =
-          await _postRepository.getPostByCategory(category.categoryId);
-      print(">>> $result");
+      List<PostModel> result = await _postRepository.getPostByUserId(userId);
       posts = result;
-      posts.forEach((element) {
-        print(element.title);
-      });
-    } catch (e) {
-      print(">>> error: $e");
-    }
-  }
-
-  Future<void> getPostByTag() async {
-    try {
-      List<PostModel> result =
-          await _postRepository.getPostByTag(promotion.name);
-      print(">>> tag $result");
-      posts = result;
-      posts.forEach((element) {
-        print(element.title);
-      });
     } catch (e) {
       print(">>> error: $e");
     }
@@ -75,20 +70,11 @@ class CategoryViewModel extends StreamViewModel {
         arguments: PostDetailPageArguments(post: post),
       );
 
-  void goToUserPostPage(String id, UserModel user) =>
-      _navigationService.pushNamed(
-        Routes.userPostPage,
-        arguments: UserPostPageArguments(userId: id, user: user),
-      );
-
   void goBack() => _navigationService.pop();
 
   void goToNoInternetPage() => _navigationService.pushToNoInternetPage(
-        Routes.categoryPage,
-        arguments: CategoryPageArguments(
-          category: category,
-          promotion: promotion,
-        ),
+        Routes.userPostPage,
+        arguments: UserPostPageArguments(userId: userId, user: user),
       );
 
   @override
@@ -97,6 +83,6 @@ class CategoryViewModel extends StreamViewModel {
   @override
   void onData(data) {
     super.onData(data);
-    // if (data == ConnectivityStatus.Offline) goToNoInternetPage();
+    if (data == ConnectivityStatus.Offline) isNetworkError = true;
   }
 }

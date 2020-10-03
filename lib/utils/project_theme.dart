@@ -5,12 +5,14 @@ class ProjectColor {
   static const Color accent = Color(0xff213e3b);
 
   static const Color white1 = Colors.white;
-  static const Color white2 = Color(0xfffaffff);
+  static const Color white2 = Color(0xfff7ffff);
 
   static const Color black1 = Colors.black;
   static const Color black2 = Color(0xff545454); // text
   static const Color red1 = Colors.red;
   static const Color red2 = Color(0xfffb2f2f); // alert
+  static const Color red3 = Color(0xfff0643a); // alert
+
   static const Color grey1 = Colors.grey;
   static const Color grey2 = Color(0xFFD5D5D5); // shadow
   static const Color shimmer = Color(0xffe0e0e0);
@@ -54,10 +56,22 @@ class TypoStyle {
     color: ProjectColor.black2,
     fontSize: TypoSize.paragraph,
   );
+  static const paragraph500 = TextStyle(
+    color: ProjectColor.black2,
+    fontSize: TypoSize.paragraph,
+    fontWeight: FontWeight.w500,
+  );
   static const paragraph600 = TextStyle(
-      color: ProjectColor.black2,
-      fontSize: TypoSize.paragraph,
-      fontWeight: FontWeight.w600);
+    color: ProjectColor.black2,
+    fontSize: TypoSize.paragraph,
+    fontWeight: FontWeight.w600,
+  );
+
+  static const paragraphMain600 = TextStyle(
+    color: ProjectColor.main,
+    fontSize: TypoSize.paragraph,
+    fontWeight: FontWeight.w600,
+  );
 
   static const paragraphGrey = TextStyle(
     color: ProjectColor.grey2,
@@ -112,7 +126,7 @@ ThemeData projectTheme = ThemeData(
   fontFamily: 'Poppins',
   primaryColor: ProjectColor.main,
   backgroundColor: ProjectColor.white1,
-  scaffoldBackgroundColor: ProjectColor.white2,
+  scaffoldBackgroundColor: ProjectColor.white1,
   iconTheme: IconThemeData(
     color: ProjectColor.main,
     size: IconSize.m,

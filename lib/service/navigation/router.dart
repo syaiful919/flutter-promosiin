@@ -7,6 +7,7 @@ import 'package:base_project/ui/pages/main_page/main_page.dart';
 import 'package:base_project/ui/pages/no_internet_page/no_internet_page.dart';
 import 'package:base_project/ui/pages/post_detail_page/post_detail_page.dart';
 import 'package:base_project/ui/pages/register_page/register_page.dart';
+import 'package:base_project/ui/pages/user_post_page/user_post_page.dart';
 import 'package:base_project/ui/pages/widget_experiment_page/widget_experiment_page.dart';
 
 @MaterialAutoRouter()
@@ -18,6 +19,7 @@ class $Router {
   RegisterPage registerPage;
   PostDetailPage postDetailPage;
   CategoryPage categoryPage;
+  UserPostPage userPostPage;
 
   NoInternetPage noInternetPage;
   InAppWebviewPage inAppWebviewPage;

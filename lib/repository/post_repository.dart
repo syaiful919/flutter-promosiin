@@ -20,6 +20,12 @@ class PostRepository {
         value: tagId,
       );
 
+  Future<List<PostModel>> getPostByUserId(String userId) =>
+      _collection.getPostsByField(
+        key: "user_id",
+        value: userId,
+      );
+
   Future<void> getPostById() => _collection.getPost();
 
   Future<void> updatePost() => _collection.updatePost();

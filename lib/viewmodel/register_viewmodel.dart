@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:base_project/locator/locator.dart';
+import 'package:base_project/model/entity/user_model.dart';
 import 'package:base_project/model/request/register_request_model.dart';
 import 'package:base_project/repository/member_repository.dart';
 import 'package:base_project/service/navigation/navigation_service.dart';
@@ -62,14 +65,17 @@ class RegisterViewModel extends BaseViewModel {
       tryingToRegister = true;
       notifyListeners();
       var response = await _memberRepository.register(RegisterRequestModel(
-        email: email,
+        email: email.toLowerCase().trim(),
         password: password,
-        username: username,
+        username: username.toLowerCase().trim(),
       ));
 
       print(">>> id: ${response.userId}");
 
       _memberRepository.saveUserId(response.userId);
+      UserModel result =
+          await _memberRepository.getUserDataRemote(response.userId);
+      _memberRepository.saveUserData(result);
       _memberRepository.setIsLogin(true);
       _navigationService.pushNamedAndRemoveUntil(Routes.mainPage);
     } on BadRequestException catch (e) {

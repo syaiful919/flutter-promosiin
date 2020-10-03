@@ -1,17 +1,21 @@
 import 'package:base_project/model/entity/post_model.dart';
+import 'package:base_project/model/entity/user_model.dart';
 import 'package:base_project/utils/project_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:base_project/extension/extended_string.dart';
 
 class PostCard extends StatelessWidget {
   final PostModel post;
   final Function(PostModel post) detailAction;
   final Function(PostModel post) saveAction;
+  final Function(String id, UserModel user) userAction;
 
   const PostCard({
     Key key,
     this.post,
     this.detailAction,
     this.saveAction,
+    this.userAction,
   }) : super(key: key);
 
   @override
@@ -23,28 +27,34 @@ class PostCard extends StatelessWidget {
         children: <Widget>[
           Row(
             children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: NetworkImage(post.user.profilePicture),
+              GestureDetector(
+                onTap: () => userAction(post.userId, post.user),
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: NetworkImage(post.user.profilePicture),
+                    ),
                   ),
+                  margin: EdgeInsets.only(right: Gap.s),
+                  width: 50,
+                  height: 50,
                 ),
-                margin: EdgeInsets.only(right: Gap.s),
-                width: 50,
-                height: 50,
               ),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    post.user.username,
-                    style: TypoStyle.paragraph600,
+                  GestureDetector(
+                    onTap: () => userAction(post.userId, post.user),
+                    child: Text(
+                      post.user.username.capitalize(),
+                      style: TypoStyle.paragraph600,
+                    ),
                   ),
                   SizedBox(height: Gap.xs),
                   Text(
-                    post.location,
+                    post.location.capitalize(),
                     style: TypoStyle.captionGrey,
                   ),
                 ],

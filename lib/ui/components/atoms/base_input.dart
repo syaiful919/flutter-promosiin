@@ -81,6 +81,8 @@ class _BaseInputState extends State<BaseInput> {
                 const EdgeInsets.fromLTRB(Gap.m, Gap.s, Gap.m, Gap.s),
             hintText: widget.placeHolder,
             hintStyle: TypoStyle.paragraphGrey,
+            filled: true,
+            fillColor: ProjectColor.white1,
             counterText: "",
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(RadiusSize.m),
