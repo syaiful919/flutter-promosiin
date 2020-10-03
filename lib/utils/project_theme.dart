@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 class ProjectColor {
   static const Color main = Color(0xff4cbbb9);
+  static const Color accent = Color(0xff213e3b);
+
   static const Color white1 = Colors.white;
+  static const Color white2 = Color(0xfffaffff);
+
   static const Color black1 = Colors.black;
   static const Color black2 = Color(0xff545454); // text
   static const Color red1 = Colors.red;
@@ -21,6 +25,7 @@ class Gap {
   static const double m = 16;
   static const double l = 32;
   static const double xl = 48;
+  static const double xxl = 72;
 }
 
 class TypoSize {
@@ -28,6 +33,7 @@ class TypoSize {
   static const double title = 16;
   static const double paragraph = 14;
   static const double caption = 12;
+  static const double small = 10;
 }
 
 class TypoStyle {
@@ -66,6 +72,11 @@ class TypoStyle {
     fontSize: TypoSize.caption,
     fontWeight: FontWeight.w600,
   );
+  static const captionWhite500 = TextStyle(
+    color: ProjectColor.white1,
+    fontSize: TypoSize.caption,
+    fontWeight: FontWeight.w600,
+  );
   static const captionGrey = TextStyle(
     color: ProjectColor.grey1,
     fontSize: TypoSize.caption,
@@ -74,6 +85,11 @@ class TypoStyle {
   static const head600 = TextStyle(
     color: ProjectColor.black2,
     fontSize: TypoSize.head,
+    fontWeight: FontWeight.w600,
+  );
+  static const small500 = TextStyle(
+    color: ProjectColor.black2,
+    fontSize: TypoSize.small,
     fontWeight: FontWeight.w600,
   );
 }
@@ -89,13 +105,14 @@ class RadiusSize {
   static const double s = 4;
   static const double m = 8;
   static const double l = 16;
+  static const double xxl = 48;
 }
 
 ThemeData projectTheme = ThemeData(
   fontFamily: 'Poppins',
   primaryColor: ProjectColor.main,
   backgroundColor: ProjectColor.white1,
-  scaffoldBackgroundColor: ProjectColor.white1,
+  scaffoldBackgroundColor: ProjectColor.white2,
   iconTheme: IconThemeData(
     color: ProjectColor.main,
     size: IconSize.m,

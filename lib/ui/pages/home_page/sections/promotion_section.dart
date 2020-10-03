@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:base_project/ui/components/atoms/shimmer_placeholder.dart';
 import 'package:base_project/utils/project_theme.dart';
 import 'package:base_project/viewmodel/home_viewmodel.dart';
@@ -24,6 +26,7 @@ class PromotionsSection extends HookViewModelWidget<HomeViewModel> {
                       },
                       enlargeCenterPage: true,
                       aspectRatio: 18 / 9,
+                      enableInfiniteScroll: true,
                     ),
                     itemCount: model.promotions.length,
                     itemBuilder: (_, index) => Container(
@@ -44,18 +47,60 @@ class PromotionsSection extends HookViewModelWidget<HomeViewModel> {
                             horizontal: Gap.s, vertical: Gap.xxs),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(RadiusSize.m),
-                          color: ProjectColor.main.withOpacity(0.5),
+                          color: ProjectColor.main.withOpacity(0.75),
                         ),
                         child: Text(
                           model.promotions[index].name,
-                          style: TypoStyle.caption500,
+                          style: TypoStyle.small500,
                         ),
                       ),
                     ),
                   ),
+                  Positioned(
+                    bottom: Gap.s,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: buildDots(
+                            currentIndex.value + 0.0, model.promotions.length),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
     );
   }
+}
+
+List<Widget> buildDots(double currentIndex, int length) {
+  Widget buildDot(int index) {
+    double selectedness = Curves.easeOut.transform(
+      max(
+        0.0,
+        1.0 - ((currentIndex ?? 0) - index).abs(),
+      ),
+    );
+    double zoom = 1.0 + (1.5 - 1.0) * selectedness;
+    return Container(
+      width: 15,
+      child: Center(
+        child: Material(
+          color: (currentIndex >= index - 0.2 && currentIndex <= index + 0.2)
+              ? ProjectColor.grey1
+              : ProjectColor.grey1.withOpacity(0.5),
+          type: MaterialType.circle,
+          child: Container(
+            width: 8.0 * zoom,
+            height: 8.0 * zoom,
+          ),
+        ),
+      ),
+    );
+  }
+
+  List<Widget> dots = List<Widget>.generate(length, buildDot);
+
+  return dots;
 }

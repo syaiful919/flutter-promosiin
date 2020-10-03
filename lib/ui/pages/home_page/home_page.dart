@@ -4,6 +4,7 @@ import 'package:base_project/ui/pages/home_page/sections/categories_section.dart
 import 'package:base_project/ui/pages/home_page/sections/header_section.dart';
 import 'package:base_project/ui/pages/home_page/sections/new_posts_section.dart';
 import 'package:base_project/ui/pages/home_page/sections/promotion_section.dart';
+import 'package:base_project/utils/project_theme.dart';
 import 'package:base_project/viewmodel/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -19,13 +20,15 @@ class HomePage extends StatelessWidget {
         viewModelBuilder: () => locator<HomeViewModel>(),
         builder: (_, model, __) => BaseStatusBar(
           child: Scaffold(
+            backgroundColor: ProjectColor.white2,
             body: CustomScrollView(
               key: PageStorageKey("home-key"),
               slivers: <Widget>[
                 Header(),
                 PromotionsSection(),
                 CategoriesSection(),
-                NewPostsSection()
+                NewPostsSection(),
+                SliverPadding(padding: EdgeInsets.only(top: Gap.xxl))
               ],
             ),
           ),

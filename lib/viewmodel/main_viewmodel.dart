@@ -59,13 +59,17 @@ class MainViewModel extends StreamViewModel {
   // }
 
   void setPageIndex(int index) {
-    if (index == 1) {
-      _navigationService.pushNamed(Routes.createPostPage);
-    } else if (userId == null && index == 2) {
+    if (userId == null && index == 1) {
       _navigationService.pushNamed(Routes.loginPage);
     } else {
       setIndex(index);
     }
+  }
+
+  void goToCreatePostPage() {
+    (userId == null)
+        ? _navigationService.pushNamed(Routes.loginPage)
+        : _navigationService.pushNamed(Routes.createPostPage);
   }
 
   void checkFirstInstall() {
