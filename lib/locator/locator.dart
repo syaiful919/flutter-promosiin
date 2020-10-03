@@ -1,4 +1,6 @@
+import 'package:base_project/repository/category_repository.dart';
 import 'package:base_project/repository/post_repository.dart';
+import 'package:base_project/repository/promotion_repository.dart';
 import 'package:base_project/service/connectivity/connectivity_service.dart';
 import 'package:base_project/service/fcm/fcm_service.dart';
 import 'package:base_project/service/firebase_auth/firebase_auth_services.dart';
@@ -41,6 +43,9 @@ Future<void> setupLocator() async {
 
   locator.registerLazySingleton<MemberRepository>(() => MemberRepository());
   locator.registerLazySingleton<PostRepository>(() => PostRepository());
+  locator.registerLazySingleton<CategoryRepository>(() => CategoryRepository());
+  locator
+      .registerLazySingleton<PromotionRepository>(() => PromotionRepository());
 
   locator.registerSingleton<MainViewModel>(MainViewModel());
   locator.registerSingleton<HomeViewModel>(HomeViewModel());

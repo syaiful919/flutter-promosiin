@@ -80,7 +80,7 @@ class _BaseInputState extends State<BaseInput> {
             contentPadding:
                 const EdgeInsets.fromLTRB(Gap.m, Gap.s, Gap.m, Gap.s),
             hintText: widget.placeHolder,
-            hintStyle: TypoStyle.placeholder,
+            hintStyle: TypoStyle.paragraphGrey,
             counterText: "",
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(RadiusSize.m),

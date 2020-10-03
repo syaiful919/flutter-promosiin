@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route_annotations.dart';
+import 'package:base_project/ui/pages/category_page/category_page.dart';
 import 'package:base_project/ui/pages/create_post_page/create_post_page.dart';
 import 'package:base_project/ui/pages/in_app_webview_page/in_app_webview_page.dart';
 import 'package:base_project/ui/pages/login_page/login_page.dart';
@@ -16,6 +17,7 @@ class $Router {
   LoginPage loginPage;
   RegisterPage registerPage;
   PostDetailPage postDetailPage;
+  CategoryPage categoryPage;
 
   NoInternetPage noInternetPage;
   InAppWebviewPage inAppWebviewPage;

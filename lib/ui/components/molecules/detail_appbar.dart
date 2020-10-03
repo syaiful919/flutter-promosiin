@@ -27,7 +27,7 @@ class _DetailAppBarState extends State<DetailAppBar> {
     return AppBar(
       title: Text(
         widget.title,
-        style: TypoStyle.pageTitle,
+        style: TypoStyle.titleWhite,
       ),
       centerTitle: true,
       backgroundColor: ProjectColor.main,

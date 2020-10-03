@@ -31,32 +31,48 @@ class TypoSize {
 }
 
 class TypoStyle {
-  static const pageTitle = TextStyle(
-    color: ProjectColor.white1,
+  static const title = TextStyle(
+    color: ProjectColor.black2,
     fontSize: TypoSize.title,
   );
-  static const sectionLabel = TextStyle(
-    color: ProjectColor.black1,
+  static const title500 = TextStyle(
+    color: ProjectColor.black2,
+    fontSize: TypoSize.title,
+    fontWeight: FontWeight.w600,
+  );
+  static const titleWhite = TextStyle(
+    color: ProjectColor.white1,
     fontSize: TypoSize.title,
   );
   static const paragraph = TextStyle(
     color: ProjectColor.black2,
     fontSize: TypoSize.paragraph,
   );
+  static const paragraph600 = TextStyle(
+      color: ProjectColor.black2,
+      fontSize: TypoSize.paragraph,
+      fontWeight: FontWeight.w600);
+
+  static const paragraphGrey = TextStyle(
+    color: ProjectColor.grey2,
+    fontSize: TypoSize.paragraph,
+  );
   static const caption = TextStyle(
     color: ProjectColor.black2,
     fontSize: TypoSize.caption,
   );
-  static const mainButton = TextStyle(
-    color: ProjectColor.white1,
-    fontSize: TypoSize.title,
+  static const caption500 = TextStyle(
+    color: ProjectColor.black2,
+    fontSize: TypoSize.caption,
+    fontWeight: FontWeight.w600,
   );
-  static const placeholder = TextStyle(
-    color: ProjectColor.grey2,
-    fontSize: TypoSize.paragraph,
+  static const captionGrey = TextStyle(
+    color: ProjectColor.grey1,
+    fontSize: TypoSize.caption,
   );
-  static const dialogTitle = TextStyle(
-    color: ProjectColor.black1,
+
+  static const head600 = TextStyle(
+    color: ProjectColor.black2,
     fontSize: TypoSize.head,
     fontWeight: FontWeight.w600,
   );
@@ -72,6 +88,7 @@ class IconSize {
 class RadiusSize {
   static const double s = 4;
   static const double m = 8;
+  static const double l = 16;
 }
 
 ThemeData projectTheme = ThemeData(

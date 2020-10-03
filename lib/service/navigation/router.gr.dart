@@ -12,6 +12,10 @@ import 'package:base_project/ui/pages/create_post_page/create_post_page.dart';
 import 'package:base_project/ui/pages/login_page/login_page.dart';
 import 'package:base_project/ui/pages/register_page/register_page.dart';
 import 'package:base_project/ui/pages/post_detail_page/post_detail_page.dart';
+import 'package:base_project/model/entity/post_model.dart';
+import 'package:base_project/ui/pages/category_page/category_page.dart';
+import 'package:base_project/model/entity/category_model.dart';
+import 'package:base_project/model/entity/promotion_model.dart';
 import 'package:base_project/ui/pages/no_internet_page/no_internet_page.dart';
 import 'package:base_project/ui/pages/in_app_webview_page/in_app_webview_page.dart';
 import 'package:base_project/ui/pages/widget_experiment_page/widget_experiment_page.dart';
@@ -22,6 +26,7 @@ abstract class Routes {
   static const loginPage = '/login-page';
   static const registerPage = '/register-page';
   static const postDetailPage = '/post-detail-page';
+  static const categoryPage = '/category-page';
   static const noInternetPage = '/no-internet-page';
   static const inAppWebviewPage = '/in-app-webview-page';
   static const widgetExperimentPage = '/widget-experiment-page';
@@ -31,6 +36,7 @@ abstract class Routes {
     loginPage,
     registerPage,
     postDetailPage,
+    categoryPage,
     noInternetPage,
     inAppWebviewPage,
     widgetExperimentPage,
@@ -75,8 +81,26 @@ class Router extends RouterBase {
           settings: settings,
         );
       case Routes.postDetailPage:
+        if (hasInvalidArgs<PostDetailPageArguments>(args, isRequired: true)) {
+          return misTypedArgsRoute<PostDetailPageArguments>(args);
+        }
+        final typedArgs = args as PostDetailPageArguments;
         return MaterialPageRoute<dynamic>(
-          builder: (context) => PostDetailPage(),
+          builder: (context) =>
+              PostDetailPage(key: typedArgs.key, post: typedArgs.post),
+          settings: settings,
+        );
+      case Routes.categoryPage:
+        if (hasInvalidArgs<CategoryPageArguments>(args)) {
+          return misTypedArgsRoute<CategoryPageArguments>(args);
+        }
+        final typedArgs =
+            args as CategoryPageArguments ?? CategoryPageArguments();
+        return MaterialPageRoute<dynamic>(
+          builder: (context) => CategoryPage(
+              key: typedArgs.key,
+              category: typedArgs.category,
+              promotion: typedArgs.promotion),
           settings: settings,
         );
       case Routes.noInternetPage:
@@ -119,6 +143,21 @@ class MainPageArguments {
   final Key key;
   final int initialIndex;
   MainPageArguments({this.key, this.initialIndex = 0});
+}
+
+//PostDetailPage arguments holder class
+class PostDetailPageArguments {
+  final Key key;
+  final PostModel post;
+  PostDetailPageArguments({this.key, @required this.post});
+}
+
+//CategoryPage arguments holder class
+class CategoryPageArguments {
+  final Key key;
+  final CategoryModel category;
+  final PromotionModel promotion;
+  CategoryPageArguments({this.key, this.category, this.promotion});
 }
 
 //NoInternetPage arguments holder class

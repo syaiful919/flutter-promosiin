@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:base_project/model/entity/category_model.dart';
+import 'package:base_project/model/entity/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 PostModel postModelFromJson(String str) => PostModel.fromJson(json.decode(str));
@@ -17,6 +18,10 @@ class PostModel {
     this.externalLink,
     this.userId,
     this.dateCreated,
+    this.isRecommended,
+    this.tags,
+    this.user,
+    this.location,
   });
 
   String postId;
@@ -27,6 +32,10 @@ class PostModel {
   List<ExternalLink> externalLink;
   String userId;
   DateTime dateCreated;
+  bool isRecommended;
+  List<String> tags;
+  UserModel user;
+  String location;
 
   factory PostModel.fromJson(Map<String, dynamic> json) => PostModel(
         postId: json["post_id"] == null ? null : json["post_id"],
@@ -44,6 +53,13 @@ class PostModel {
         dateCreated: json["date_created"] == null
             ? null
             : (json["date_created"] as Timestamp).toDate(),
+        isRecommended:
+            json["is_recommended"] == null ? null : json["is_recommended"],
+        tags: json["tags"] == null
+            ? null
+            : List<String>.from(json["tags"].map((x) => x)),
+        user: json["user"] == null ? null : UserModel.fromJson(json["user"]),
+        location: json["location"] == null ? null : json["location"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -58,6 +74,10 @@ class PostModel {
         "user_id": userId == null ? null : userId,
         "date_created":
             dateCreated == null ? null : Timestamp.fromDate(dateCreated),
+        "is_recommended": isRecommended == null ? null : isRecommended,
+        "tags": tags == null ? null : List<dynamic>.from(tags.map((x) => x)),
+        "user": user == null ? null : user.toJson(),
+        "location": location == null ? null : location,
       };
 }
 

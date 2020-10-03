@@ -45,8 +45,8 @@ class BaseButton extends StatelessWidget {
             : Text(
                 title,
                 style: outlineType
-                    ? TypoStyle.mainButton.copyWith(color: ProjectColor.main)
-                    : TypoStyle.mainButton,
+                    ? TypoStyle.titleWhite.copyWith(color: ProjectColor.main)
+                    : TypoStyle.titleWhite,
               ),
         onPressed: (onPressed == null)
             ? null

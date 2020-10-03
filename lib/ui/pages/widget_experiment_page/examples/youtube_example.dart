@@ -26,7 +26,7 @@ class _YoutubeExampleState extends State<YoutubeExample> {
               alignment: Alignment.centerLeft,
               child: Text(
                 "Youtube Video Example",
-                style: TypoStyle.sectionLabel,
+                style: TypoStyle.title,
               )),
           SizedBox(height: Gap.s),
           YoutubePlayer(

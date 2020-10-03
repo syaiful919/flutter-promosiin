@@ -41,7 +41,7 @@ class NoInternetPage extends StatelessWidget {
                   SizedBox(height: Gap.m),
                   Text(
                     NoInternetDict.checkConnection,
-                    style: TypoStyle.sectionLabel,
+                    style: TypoStyle.title,
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: Gap.l),

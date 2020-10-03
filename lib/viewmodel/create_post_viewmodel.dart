@@ -155,6 +155,7 @@ class CreatePostViewModel extends BaseViewModel {
         externalLink: links,
         userId: userId,
         dateCreated: DateTime.now(),
+        isRecommended: false,
       );
       _postRepository.createPost(post);
     } catch (e) {
