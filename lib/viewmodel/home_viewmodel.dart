@@ -73,9 +73,6 @@ class HomeViewModel extends MultipleStreamViewModel {
     try {
       List<PromotionModel> result = await _promotionRepository.getPromotions();
       promotions = result;
-      promotions.forEach((element) {
-        print(">>> ${element.name}");
-      });
     } catch (e) {
       print(">>> error: $e");
     }
@@ -128,6 +125,7 @@ class HomeViewModel extends MultipleStreamViewModel {
   @override
   Map<String, StreamData> get streamsMap => {
         StreamKey.authStatus: StreamData<bool>(_memberRepository.isLogin),
+        StreamKey.postAdded: StreamData<bool>(_postRepository.isPostAdded),
         StreamKey.connectivity:
             StreamData<ConnectivityStatus>(_connectivityService.status),
       };
@@ -143,6 +141,11 @@ class HomeViewModel extends MultipleStreamViewModel {
       } else if (!data && username != null) {
         username = null;
         notifyListeners();
+      }
+    } else if (key == StreamKey.postAdded) {
+      if (data) {
+        _postRepository.setPostAdded(false);
+        firstLoad();
       }
     }
   }

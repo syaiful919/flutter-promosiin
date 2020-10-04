@@ -1,4 +1,5 @@
 class StreamKey {
-  static const String authStatus = "cart-count-auth-status";
+  static const String authStatus = "auth-status-stream";
   static const String connectivity = "connectivity-stream";
+  static const String postAdded = "post-added-stream";
 }

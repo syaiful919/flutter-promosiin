@@ -7,6 +7,7 @@ import 'package:base_project/service/connectivity/connectivity_service.dart';
 import 'package:base_project/service/connectivity/connectivity_status.dart';
 import 'package:base_project/service/navigation/navigation_service.dart';
 import 'package:base_project/service/navigation/router.gr.dart';
+import 'package:base_project/ui/components/molecules/dialog.dart';
 import 'package:base_project/viewmodel/main_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -33,6 +34,14 @@ class MyAccountViewModel extends StreamViewModel {
     user = _memberRepository.getUserData();
     userId = _memberRepository.getUserId();
     notifyListeners();
+  }
+
+  void showLogoutDialog() async {
+    var action = await Dialogs.yesNoDialog(
+      context: pageContext,
+      title: "Yakin akan keluar ?",
+    );
+    if (action == DialogAction.yes) logOut();
   }
 
   void logOut() {

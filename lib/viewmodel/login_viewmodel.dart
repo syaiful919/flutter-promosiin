@@ -54,8 +54,6 @@ class LoginViewModel extends BaseViewModel {
         password: password,
       ));
 
-      print(">>> id: ${response.userId}");
-
       _memberRepository.saveUserId(response.userId);
       UserModel result =
           await _memberRepository.getUserDataRemote(response.userId);

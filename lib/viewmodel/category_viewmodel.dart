@@ -46,7 +46,6 @@ class CategoryViewModel extends StreamViewModel {
     try {
       List<PostModel> result =
           await _postRepository.getPostByCategory(category.categoryId);
-      print(">>> $result");
       posts = result;
       posts.forEach((element) {
         print(element.title);
@@ -60,7 +59,6 @@ class CategoryViewModel extends StreamViewModel {
     try {
       List<PostModel> result =
           await _postRepository.getPostByTag(promotion.name);
-      print(">>> tag $result");
       posts = result;
       posts.forEach((element) {
         print(element.title);

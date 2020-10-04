@@ -70,8 +70,6 @@ class RegisterViewModel extends BaseViewModel {
         username: username.toLowerCase().trim(),
       ));
 
-      print(">>> id: ${response.userId}");
-
       _memberRepository.saveUserId(response.userId);
       UserModel result =
           await _memberRepository.getUserDataRemote(response.userId);

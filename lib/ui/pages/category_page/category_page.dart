@@ -1,6 +1,7 @@
 import 'package:base_project/model/entity/category_model.dart';
 import 'package:base_project/model/entity/promotion_model.dart';
 import 'package:base_project/ui/components/atoms/base_status_bar.dart';
+import 'package:base_project/ui/components/atoms/loading.dart';
 import 'package:base_project/ui/components/molecules/detail_appbar.dart';
 import 'package:base_project/ui/components/molecules/empty_content.dart';
 import 'package:base_project/ui/components/molecules/post_card.dart';
@@ -35,13 +36,7 @@ class CategoryPage extends StatelessWidget {
             backAction: () => model.goBack(),
           ),
           body: (model.posts == null)
-              ? Container(
-                  alignment: Alignment.center,
-                  child: CircularProgressIndicator(
-                    valueColor:
-                        AlwaysStoppedAnimation<Color>(ProjectColor.main),
-                  ),
-                )
+              ? Loading()
               : (model.posts.length > 0)
                   ? ListView(
                       children: <Widget>[

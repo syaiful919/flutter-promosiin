@@ -1,5 +1,6 @@
 import 'package:base_project/model/entity/post_model.dart';
 import 'package:base_project/model/entity/user_model.dart';
+import 'package:base_project/utils/project_images.dart';
 import 'package:base_project/utils/project_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:base_project/extension/extended_string.dart';
@@ -33,7 +34,9 @@ class PostCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: NetworkImage(post.user.profilePicture),
+                      image: post.user.profilePicture == null
+                          ? AssetImage(ProjectImages.avatar)
+                          : NetworkImage(post.user.profilePicture),
                     ),
                   ),
                   margin: EdgeInsets.only(right: Gap.s),

@@ -2,6 +2,7 @@ import 'package:base_project/utils/project_icons.dart';
 import 'package:base_project/utils/project_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:base_project/extension/extended_string.dart';
 
 class CategoryItem extends StatelessWidget {
   final bool isFirst;
@@ -50,7 +51,7 @@ class CategoryItem extends StatelessWidget {
               height: Gap.xs,
             ),
             Text(
-              name,
+              name.capitalize(),
               style: TypoStyle.caption,
               overflow: TextOverflow.ellipsis,
               maxLines: 2,

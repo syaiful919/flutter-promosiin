@@ -54,7 +54,7 @@ class MainPage extends StatelessWidget {
                       child: Container(
                         height: 70,
                         decoration: BoxDecoration(
-                          color: ProjectColor.white1,
+                          color: ProjectColor.white2,
                           borderRadius: BorderRadius.only(
                             topRight: Radius.circular(RadiusSize.xxl),
                             topLeft: Radius.circular(RadiusSize.xxl),

@@ -20,7 +20,6 @@ class HomePage extends StatelessWidget {
         onModelReady: (model) => model.firstLoad(context: context),
         viewModelBuilder: () => locator<HomeViewModel>(),
         builder: (_, model, __) => Scaffold(
-            backgroundColor: ProjectColor.white2,
             body: (model.isNetworkError)
                 ? NoInternetContent(ctaAction: () => model.firstLoad())
                 : CustomScrollView(

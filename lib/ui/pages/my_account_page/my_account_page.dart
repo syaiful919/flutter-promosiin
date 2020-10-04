@@ -25,7 +25,6 @@ class MyAccountPage extends StatelessWidget {
           body: Container(
             alignment: Alignment.center,
             height: MediaQuery.of(context).size.height,
-            color: ProjectColor.white2,
             padding: EdgeInsets.symmetric(horizontal: Gap.m),
             child: ListView(
               children: <Widget>[
@@ -80,7 +79,7 @@ class MyAccountPage extends StatelessWidget {
                 ListItem(
                   title: "Log out",
                   iconPath: ProjectIcons.logout,
-                  onTap: () => model.logOut(),
+                  onTap: () => model.showLogoutDialog(),
                 ),
               ],
             ),

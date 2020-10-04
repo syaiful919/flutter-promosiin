@@ -13,13 +13,10 @@ class FirebaseAuthServices {
     @required String password,
   }) async {
     try {
-      print(">>> email: $email");
-      print(">>> password: $password");
       var result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
 
-      print(">>> result: $result");
       return AuthResponseModel(userId: user.uid);
     } on FirebaseAuthException catch (e) {
       print(">>> firebase error: $e");
@@ -35,12 +32,9 @@ class FirebaseAuthServices {
     @required String password,
   }) async {
     try {
-      print(">>> email: $email");
-      print(">>> password: $password");
       var result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
 
-      print(">>> result: $result");
       User user = result.user;
       return AuthResponseModel(userId: user.uid);
     } on FirebaseAuthException catch (e) {

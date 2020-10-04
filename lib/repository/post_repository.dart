@@ -1,8 +1,18 @@
 import 'package:base_project/model/entity/post_model.dart';
 import 'package:base_project/network/firebase/posts_collection.dart';
+import 'package:rxdart/rxdart.dart';
 
 class PostRepository {
   final PostsCollection _collection = PostsCollection();
+
+  final BehaviorSubject<bool> _newPostController = BehaviorSubject<bool>();
+
+  PostRepository() {
+    _newPostController.add(false);
+  }
+
+  void setPostAdded(bool val) => _newPostController.sink.add(val);
+  Stream<bool> get isPostAdded => _newPostController.stream;
 
   Future<void> createPost(PostModel post) => _collection.createPost(post);
 
