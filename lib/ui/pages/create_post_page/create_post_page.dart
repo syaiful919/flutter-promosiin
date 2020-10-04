@@ -1,4 +1,3 @@
-import 'package:base_project/model/entity/category_model.dart';
 import 'package:base_project/model/entity/post_model.dart';
 import 'package:base_project/ui/components/atoms/base_button.dart';
 import 'package:base_project/ui/components/atoms/base_input.dart';

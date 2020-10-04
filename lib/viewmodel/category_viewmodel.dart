@@ -7,7 +7,6 @@ import 'package:base_project/model/entity/promotion_model.dart';
 import 'package:base_project/model/entity/user_model.dart';
 import 'package:base_project/repository/post_repository.dart';
 import 'package:base_project/service/connectivity/connectivity_service.dart';
-import 'package:base_project/service/connectivity/connectivity_status.dart';
 import 'package:base_project/service/navigation/navigation_service.dart';
 import 'package:base_project/service/navigation/router.gr.dart';
 import 'package:flutter/material.dart';

@@ -38,25 +38,32 @@ class CategoryPage extends StatelessWidget {
           body: (model.posts == null)
               ? Loading()
               : (model.posts.length > 0)
-                  ? ListView(
-                      children: <Widget>[
-                        SizedBox(height: Gap.m),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (_, index) => PostCard(
-                            post: model.posts[index],
-                            saveAction: (val) {
-                              print(">>> save");
-                            },
-                            detailAction: (val) =>
-                                model.goToPostDetailPage(val),
-                            userAction: (id, user) =>
-                                model.goToUserPostPage(id, user),
+                  ? RefreshIndicator(
+                      onRefresh: () => model.firstLoad(
+                        context: context,
+                        cat: category,
+                        promo: promotion,
+                      ),
+                      child: ListView(
+                        children: <Widget>[
+                          SizedBox(height: Gap.m),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (_, index) => PostCard(
+                              post: model.posts[index],
+                              saveAction: (val) {
+                                print(">>> save");
+                              },
+                              detailAction: (val) =>
+                                  model.goToPostDetailPage(val),
+                              userAction: (id, user) =>
+                                  model.goToUserPostPage(id, user),
+                            ),
+                            itemCount: model.posts.length,
                           ),
-                          itemCount: model.posts.length,
-                        ),
-                      ],
+                        ],
+                      ),
                     )
                   : EmptyContent(),
         ),

@@ -25,6 +25,7 @@ class PostCard extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(Gap.m, Gap.zero, Gap.m, Gap.l),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Row(
             children: <Widget>[

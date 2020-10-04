@@ -73,7 +73,7 @@ flutter_icons:
 # splash screen generator
 # run: flutter pub pub run flutter_native_splash:create
 flutter_native_splash:
-  image: assets/logo/logo_transparent.png
+  image: assets/logo/splash.png
   color: "#ffffff"
   fill: false
   android_disable_fullscreen: true

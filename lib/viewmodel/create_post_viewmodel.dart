@@ -14,7 +14,6 @@ import 'package:base_project/service/uuid/uuid_service.dart';
 import 'package:base_project/ui/components/molecules/dialog.dart';
 import 'package:base_project/ui/pages/create_post_page/components/categories_dialog.dart';
 import 'package:base_project/ui/pages/create_post_page/components/link_dialog.dart';
-import 'package:base_project/ui/pages/create_post_page/create_post_page.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 

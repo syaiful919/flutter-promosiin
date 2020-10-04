@@ -1,5 +1,4 @@
 import 'package:base_project/locator/locator.dart';
-import 'package:base_project/ui/components/atoms/base_status_bar.dart';
 import 'package:base_project/ui/components/molecules/no_internet_content.dart';
 import 'package:base_project/ui/pages/home_page/sections/categories_section.dart';
 import 'package:base_project/ui/pages/home_page/sections/header_section.dart';
@@ -22,15 +21,18 @@ class HomePage extends StatelessWidget {
         builder: (_, model, __) => Scaffold(
             body: (model.isNetworkError)
                 ? NoInternetContent(ctaAction: () => model.firstLoad())
-                : CustomScrollView(
-                    key: PageStorageKey("home-key"),
-                    slivers: <Widget>[
-                      Header(),
-                      PromotionsSection(),
-                      CategoriesSection(),
-                      NewPostsSection(),
-                      SliverPadding(padding: EdgeInsets.only(top: Gap.xxl))
-                    ],
+                : RefreshIndicator(
+                    onRefresh: () => model.firstLoad(),
+                    child: CustomScrollView(
+                      key: PageStorageKey("home-key"),
+                      slivers: <Widget>[
+                        Header(),
+                        PromotionsSection(),
+                        CategoriesSection(),
+                        NewPostsSection(),
+                        SliverPadding(padding: EdgeInsets.only(top: Gap.xxl))
+                      ],
+                    ),
                   )),
       );
 }

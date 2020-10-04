@@ -1,4 +1,3 @@
-import 'package:base_project/locator/locator.dart';
 import 'package:base_project/model/entity/post_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
@@ -15,12 +14,9 @@ class PostsCollection {
     }
   }
 
-  Future<void> updatePost() async {
+  Future<void> updatePost(String postId, PostModel post) async {
     try {
-      await postsCollection.doc("ughG8MqrWWORvKbCEoIu").update(PostModel(
-            title: "title edit",
-            description: "desc",
-          ).toJson());
+      await postsCollection.doc(postId).update(post.toJson());
     } catch (e) {
       print(">>> error: $e");
     }
@@ -110,16 +106,6 @@ class PostsCollection {
           .startAfterDocument(lastDoc)
           .limit(limit)
           .get();
-      print(result.docs[0].data());
-    } catch (e) {
-      print(">>> error: $e");
-    }
-  }
-
-  Future<void> search({String key, dynamic value}) async {
-    try {
-      var result =
-          await postsCollection.where(key, arrayContainsAny: value).get();
       print(result.docs[0].data());
     } catch (e) {
       print(">>> error: $e");

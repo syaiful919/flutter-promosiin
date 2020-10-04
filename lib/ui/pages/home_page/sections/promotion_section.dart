@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:base_project/ui/components/atoms/shimmer_placeholder.dart';
 import 'package:base_project/utils/project_theme.dart';
 import 'package:base_project/viewmodel/home_viewmodel.dart';
 import 'package:carousel_slider/carousel_slider.dart';

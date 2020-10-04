@@ -23,7 +23,7 @@ class SectionRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(Gap.m, Gap.m, Gap.m, Gap.m),
+      padding: const EdgeInsets.fromLTRB(Gap.m, Gap.zero, Gap.m, Gap.zero),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,

@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:base_project/locator/locator.dart';
-import 'package:base_project/model/entity/category_model.dart';
 import 'package:base_project/model/entity/post_model.dart';
-import 'package:base_project/model/entity/promotion_model.dart';
 import 'package:base_project/model/entity/user_model.dart';
 import 'package:base_project/repository/member_repository.dart';
 import 'package:base_project/repository/post_repository.dart';

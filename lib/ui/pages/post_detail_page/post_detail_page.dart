@@ -1,7 +1,6 @@
 import 'package:base_project/model/entity/post_model.dart';
 import 'package:base_project/ui/components/atoms/base_status_bar.dart';
 import 'package:base_project/ui/components/atoms/transparent_icon_button.dart';
-import 'package:base_project/ui/components/molecules/detail_appbar.dart';
 import 'package:base_project/utils/project_theme.dart';
 import 'package:base_project/viewmodel/post_detail_viewmodel.dart';
 import 'package:flutter/material.dart';

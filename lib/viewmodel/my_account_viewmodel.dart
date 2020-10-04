@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:base_project/locator/locator.dart';
 import 'package:base_project/model/entity/user_model.dart';
 import 'package:base_project/repository/member_repository.dart';
-import 'package:base_project/service/connectivity/connectivity_service.dart';
-import 'package:base_project/service/connectivity/connectivity_status.dart';
 import 'package:base_project/service/navigation/navigation_service.dart';
 import 'package:base_project/service/navigation/router.gr.dart';
 import 'package:base_project/ui/components/molecules/dialog.dart';
@@ -14,7 +12,6 @@ import 'package:stacked/stacked.dart';
 
 class MyAccountViewModel extends StreamViewModel {
   final _navigationService = locator<NavigationService>();
-  final _connectivityService = locator<ConnectivityService>();
 
   final _memberRepository = locator<MemberRepository>();
 

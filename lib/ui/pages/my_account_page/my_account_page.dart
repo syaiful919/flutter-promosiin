@@ -1,6 +1,5 @@
 import 'package:base_project/locator/locator.dart';
 import 'package:base_project/ui/components/atoms/base_status_bar.dart';
-import 'package:base_project/ui/components/molecules/dialog.dart';
 import 'package:base_project/utils/project_icons.dart';
 import 'package:base_project/utils/project_images.dart';
 import 'package:base_project/utils/project_theme.dart';

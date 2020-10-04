@@ -1,8 +1,6 @@
 import 'package:base_project/ui/components/atoms/base_button.dart';
 import 'package:base_project/ui/components/atoms/base_input.dart';
-import 'package:base_project/ui/components/atoms/base_status_bar.dart';
 import 'package:base_project/ui/components/atoms/transparent_icon_button.dart';
-import 'package:base_project/ui/components/molecules/detail_appbar.dart';
 import 'package:base_project/utils/project_theme.dart';
 import 'package:base_project/viewmodel/register_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: Gap.xs),
                         child: Text(
-                          "Daftar dan\npromosiin usahamu",
+                          "Daftar dan \nnikmati fiturnya ",
                           style: TypoStyle.head600,
                         ),
                       ),

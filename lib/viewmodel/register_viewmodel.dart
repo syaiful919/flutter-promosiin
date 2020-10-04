@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:base_project/locator/locator.dart';
 import 'package:base_project/model/entity/user_model.dart';
 import 'package:base_project/model/request/register_request_model.dart';
