@@ -28,10 +28,14 @@ class CreatePostViewModel extends BaseViewModel {
   final _categoryRepository = locator<CategoryRepository>();
 
   BuildContext pageContext;
+  bool editType = false;
 
+  String postId;
+  DateTime dateCreated;
   String title;
   String description;
   String location;
+  bool isRecommended;
 
   CategoryModel category;
   List<ExternalLink> links = [];
@@ -39,15 +43,36 @@ class CreatePostViewModel extends BaseViewModel {
   String userId;
   File image;
   String imagePath;
+  String networkImagePath;
+
   List<CategoryModel> categories;
 
   bool tryingToPost = false;
 
-  Future<void> firstLoad({BuildContext context}) async {
+  Future<void> firstLoad({BuildContext context, PostModel post}) async {
     if (pageContext == null && context != null) pageContext = context;
+
     getUserId();
     getUserData();
+    checkIsEditType(post);
     runBusyFuture(getCategories());
+  }
+
+  void checkIsEditType(PostModel post) {
+    print(post);
+    if (post != null) {
+      postId = post.postId;
+      title = post.title;
+      description = post.description;
+      category = post.category;
+      networkImagePath = post.imagePath;
+      links = post.externalLink;
+      dateCreated = post.dateCreated;
+      isRecommended = post.isRecommended;
+      location = post.location;
+      editType = true;
+      notifyListeners();
+    }
   }
 
   void getUserId() {
@@ -140,39 +165,39 @@ class CreatePostViewModel extends BaseViewModel {
 
   void openCamera() async {
     image = await _imagePicker.getImageFromCamera();
-    if (image != null) imagePath = image.path;
+    // if (image != null) imagePath = image.path;
     notifyListeners();
   }
 
   void openGallery() async {
     image = await _imagePicker.getImageFromGallery();
-    if (image != null) imagePath = image.path;
+    // if (image != null) imagePath = image.path;
     notifyListeners();
   }
 
   bool isDataValid() =>
-      title != null &&
-      description != null &&
-      location != null &&
+      (title != null && title.isNotEmpty) &&
+      (description != null && description.isNotEmpty) &&
+      (location != null && location.isNotEmpty) &&
       category != null &&
       links.length > 0 &&
-      imagePath != null;
+      (image != null || networkImagePath != null);
 
   Future<void> createPost() async {
     try {
       tryingToPost = true;
       notifyListeners();
-      imagePath = await _firebaseStorage.uploadFile(image);
+      if (image != null) imagePath = await _firebaseStorage.uploadFile(image);
       PostModel post = PostModel(
-        postId: _uuid.generateId(),
+        postId: postId ?? _uuid.generateId(),
         title: title,
         description: description,
         category: category,
-        imagePath: imagePath,
+        imagePath: imagePath ?? networkImagePath,
         externalLink: links,
         userId: userId,
-        dateCreated: DateTime.now(),
-        isRecommended: false,
+        dateCreated: dateCreated ?? DateTime.now(),
+        isRecommended: isRecommended ?? false,
         user: user,
         location: location,
       );

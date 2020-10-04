@@ -15,19 +15,25 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked/stacked.dart';
 
 class CreatePostPage extends HookWidget {
+  final PostModel post;
+
+  CreatePostPage({this.post});
+
   @override
   Widget build(BuildContext context) {
-    var titleController = useTextEditingController();
-    var descriptionController = useTextEditingController();
-    var locationController = useTextEditingController();
+    var titleController = useTextEditingController(text: post?.title ?? "");
+    var descriptionController =
+        useTextEditingController(text: post?.description ?? "");
+    var locationController =
+        useTextEditingController(text: post?.location ?? "");
 
     return ViewModelBuilder<CreatePostViewModel>.reactive(
-      onModelReady: (model) => model.firstLoad(context: context),
+      onModelReady: (model) => model.firstLoad(context: context, post: post),
       viewModelBuilder: () => CreatePostViewModel(),
       builder: (_, model, __) => BaseStatusBar(
         child: Scaffold(
           appBar: DetailAppBar(
-            title: "Postingan Baru",
+            title: model.editType ? "Edit Postingan" : "Postingan Baru",
             backAction: () => model.goBack(),
           ),
           body: Padding(
@@ -64,17 +70,19 @@ class CreatePostPage extends HookWidget {
                         ),
                       ),
                       alignment: Alignment.center,
-                      child: (model.image == null)
-                          ? Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                SizedBox(height: Gap.xl),
-                                Image.asset(ProjectImages.images),
-                                SizedBox(height: Gap.xl),
-                                Text("Pilih gambar"),
-                              ],
-                            )
-                          : Image.file(model.image),
+                      child: (model.networkImagePath != null)
+                          ? Image.network(model.networkImagePath)
+                          : (model.image == null)
+                              ? Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    SizedBox(height: Gap.xl),
+                                    Image.asset(ProjectImages.images),
+                                    SizedBox(height: Gap.xl),
+                                    Text("Pilih gambar"),
+                                  ],
+                                )
+                              : Image.file(model.image),
                     ),
                   ),
                 ),
@@ -175,7 +183,9 @@ class CreatePostPage extends HookWidget {
                 BaseButton(
                   onPressed:
                       model.isDataValid() ? () => model.createPost() : null,
-                  title: "Tambah Postingan",
+                  title: model.editType
+                      ? "Perbarui Postingan"
+                      : "Tambah Postingan",
                   isLoading: model.tryingToPost,
                 ),
                 SizedBox(height: Gap.m),

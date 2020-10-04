@@ -1,11 +1,15 @@
 import 'package:base_project/utils/project_theme.dart';
 import 'package:flutter/material.dart';
 
-class TransparentBackButton extends StatelessWidget {
+class TransparentIconButton extends StatelessWidget {
   final VoidCallback onTap;
+  final IconData icon;
 
-  const TransparentBackButton({Key key, @required this.onTap})
-      : super(key: key);
+  const TransparentIconButton({
+    Key key,
+    @required this.onTap,
+    this.icon = Icons.arrow_back_ios,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,7 @@ class TransparentBackButton extends StatelessWidget {
           color: ProjectColor.white2.withOpacity(0.8),
         ),
         child: Icon(
-          Icons.arrow_back_ios,
+          icon,
           color: ProjectColor.black2,
         ),
       ),

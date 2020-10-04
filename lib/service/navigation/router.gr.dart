@@ -9,10 +9,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:base_project/ui/pages/main_page/main_page.dart';
 import 'package:base_project/ui/pages/create_post_page/create_post_page.dart';
+import 'package:base_project/model/entity/post_model.dart';
 import 'package:base_project/ui/pages/login_page/login_page.dart';
 import 'package:base_project/ui/pages/register_page/register_page.dart';
 import 'package:base_project/ui/pages/post_detail_page/post_detail_page.dart';
-import 'package:base_project/model/entity/post_model.dart';
 import 'package:base_project/ui/pages/category_page/category_page.dart';
 import 'package:base_project/model/entity/category_model.dart';
 import 'package:base_project/model/entity/promotion_model.dart';
@@ -70,8 +70,13 @@ class Router extends RouterBase {
           settings: settings,
         );
       case Routes.createPostPage:
+        if (hasInvalidArgs<CreatePostPageArguments>(args)) {
+          return misTypedArgsRoute<CreatePostPageArguments>(args);
+        }
+        final typedArgs =
+            args as CreatePostPageArguments ?? CreatePostPageArguments();
         return MaterialPageRoute<dynamic>(
-          builder: (context) => CreatePostPage(),
+          builder: (context) => CreatePostPage(post: typedArgs.post),
           settings: settings,
         );
       case Routes.loginPage:
@@ -159,6 +164,12 @@ class MainPageArguments {
   final Key key;
   final int initialIndex;
   MainPageArguments({this.key, this.initialIndex = 0});
+}
+
+//CreatePostPage arguments holder class
+class CreatePostPageArguments {
+  final PostModel post;
+  CreatePostPageArguments({this.post});
 }
 
 //PostDetailPage arguments holder class
