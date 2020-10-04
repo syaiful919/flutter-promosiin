@@ -35,6 +35,17 @@ class CreatePostPage extends HookWidget {
           appBar: DetailAppBar(
             title: model.editType ? "Edit Postingan" : "Postingan Baru",
             backAction: () => model.goBack(),
+            actions: (model.editType)
+                ? <Widget>[
+                    IconButton(
+                      onPressed: () => model.showDeleteDialog(),
+                      icon: Icon(
+                        Icons.delete,
+                        color: ProjectColor.white1,
+                      ),
+                    )
+                  ]
+                : null,
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: Gap.m),

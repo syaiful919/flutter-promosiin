@@ -126,18 +126,20 @@ class PostsCollection {
     }
   }
 
-  Future<void> getPost() async {
+  Future<PostModel> getPost(String postId) async {
     try {
-      var result = await postsCollection.doc("ughG8MqrWWORvKbCEoIu").get();
+      var result = await postsCollection.doc(postId).get();
+
       print(result.data());
+      return PostModel.fromJson(result.data());
     } catch (e) {
       print(">>> error: $e");
     }
   }
 
-  Future<void> deletePost() async {
+  Future<void> deletePost(String postId) async {
     try {
-      await postsCollection.doc("ughG8MqrWWORvKbCEoIu").delete();
+      await postsCollection.doc(postId).delete();
     } catch (e) {
       print(">>> error: $e");
     }

@@ -36,9 +36,7 @@ class PostRepository {
         value: userId,
       );
 
-  Future<void> getPostById() => _collection.getPost();
+  Future<PostModel> getPostById(String postId) => _collection.getPost(postId);
 
-  Future<void> updatePost() => _collection.updatePost();
-
-  Future<void> deletePost() => _collection.deletePost();
+  Future<void> deletePost(String postId) => _collection.deletePost(postId);
 }

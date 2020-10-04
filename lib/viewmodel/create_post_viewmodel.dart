@@ -153,6 +153,26 @@ class CreatePostViewModel extends BaseViewModel {
     }
   }
 
+  void showDeleteDialog() async {
+    var action = await Dialogs.yesNoDialog(
+      context: pageContext,
+      title: "Yakin akan menghapus postingan ini ?",
+    );
+    if (action == DialogAction.yes) {
+      deletePost();
+    }
+  }
+
+  Future<void> deletePost() async {
+    try {
+      await _postRepository.deletePost(postId);
+      _postRepository.setPostAdded(true);
+      _navigationService.pushNamedAndRemoveUntil(Routes.mainPage);
+    } catch (e) {
+      print(">>> error $e");
+    }
+  }
+
   void removeLink(int index) {
     links.removeAt(index);
     notifyListeners();

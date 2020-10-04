@@ -5,12 +5,14 @@ class DetailAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
   final VoidCallback backAction;
   final bool showBackButton;
+  final List<Widget> actions;
 
   DetailAppBar({
     Key key,
     @required this.title,
     this.backAction,
     this.showBackButton = true,
+    this.actions,
   })  : preferredSize = Size.fromHeight(kToolbarHeight),
         super(key: key);
 
@@ -39,6 +41,7 @@ class _DetailAppBarState extends State<DetailAppBar> {
               ),
               onPressed: () => widget.backAction())
           : null,
+      actions: widget.actions,
     );
   }
 }
