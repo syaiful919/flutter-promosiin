@@ -36,9 +36,9 @@ class MyAccountViewModel extends StreamViewModel {
     notifyListeners();
   }
 
-  void showLogoutDialog() async {
+  void showLogoutDialog(BuildContext context) async {
     var action = await Dialogs.yesNoDialog(
-      context: pageContext,
+      context: context,
       title: "Yakin akan keluar ?",
     );
     if (action == DialogAction.yes) logOut();
