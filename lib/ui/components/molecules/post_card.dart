@@ -41,8 +41,8 @@ class PostCard extends StatelessWidget {
                     ),
                   ),
                   margin: EdgeInsets.only(right: Gap.s),
-                  width: 50,
-                  height: 50,
+                  width: 36,
+                  height: 36,
                 ),
               ),
               Column(
@@ -53,10 +53,9 @@ class PostCard extends StatelessWidget {
                     onTap: () => userAction(post.userId, post.user),
                     child: Text(
                       post.user.username.capitalize(),
-                      style: TypoStyle.paragraph600,
+                      style: TypoStyle.caption500,
                     ),
                   ),
-                  SizedBox(height: Gap.xs),
                   Text(
                     post.location.capitalize(),
                     style: TypoStyle.captionGrey,
@@ -68,7 +67,7 @@ class PostCard extends StatelessWidget {
           SizedBox(height: Gap.m),
           Text(
             post.title,
-            style: TypoStyle.paragraph600,
+            style: TypoStyle.caption500,
           ),
           SizedBox(height: Gap.s),
           ClipRRect(

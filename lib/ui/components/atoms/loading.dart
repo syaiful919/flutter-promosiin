@@ -6,6 +6,7 @@ class Loading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
+      padding: EdgeInsets.all(Gap.m),
       child: CircularProgressIndicator(
         valueColor: AlwaysStoppedAnimation<Color>(ProjectColor.main),
       ),

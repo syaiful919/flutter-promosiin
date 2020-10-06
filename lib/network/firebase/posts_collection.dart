@@ -28,7 +28,7 @@ class PostsCollection {
     try {
       var result = await postsCollection
           .orderBy("date_created", descending: true)
-          .limit(limit)
+          // .limit(limit)
           .get();
       List<PostModel> posts = [];
       result.docs.forEach((element) {
@@ -46,8 +46,10 @@ class PostsCollection {
     @required QueryDocumentSnapshot lastDoc,
   }) async {
     try {
-      var result =
-          await postsCollection.startAfterDocument(lastDoc).limit(limit).get();
+      var result = await postsCollection
+          .startAfterDocument(lastDoc)
+          // .limit(limit)
+          .get();
       print(result.docs[0].data());
     } catch (e) {
       print(">>> error: $e");
@@ -60,8 +62,10 @@ class PostsCollection {
     int limit = 20,
   }) async {
     try {
-      var result =
-          await postsCollection.where(key, isEqualTo: value).limit(limit).get();
+      var result = await postsCollection
+          .where(key, isEqualTo: value)
+          // .limit(limit)
+          .get();
       List<PostModel> posts = [];
       result.docs.forEach((element) {
         posts.add(PostModel.fromJson(element.data()));
@@ -81,7 +85,7 @@ class PostsCollection {
     try {
       var result = await postsCollection
           .where(key, arrayContains: value)
-          .limit(limit)
+          // .limit(limit)
           .get();
       List<PostModel> posts = [];
       result.docs.forEach((element) {
@@ -104,7 +108,7 @@ class PostsCollection {
       var result = await postsCollection
           .where(key, isEqualTo: value)
           .startAfterDocument(lastDoc)
-          .limit(limit)
+          // .limit(limit)
           .get();
       print(result.docs[0].data());
     } catch (e) {
