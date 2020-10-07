@@ -33,7 +33,7 @@ class HomeViewModel extends MultipleStreamViewModel {
 
   bool isNetworkError = false;
 
-  String username;
+  UserModel get user => dataMap[StreamKey.dataChanged];
 
   Future<void> firstLoad({BuildContext context}) async {
     if (pageContext == null && context != null) pageContext = context;
@@ -46,7 +46,7 @@ class HomeViewModel extends MultipleStreamViewModel {
 
   Future<void> getUserData() async {
     UserModel user = _memberRepository.getUserData();
-    if (user != null) username = user.username.getFirstWord();
+    _memberRepository.setDataStream(user);
 
     notifyListeners();
   }
@@ -55,6 +55,13 @@ class HomeViewModel extends MultipleStreamViewModel {
     try {
       List<PostModel> result = await _postRepository.getNewPosts();
       newPost = result;
+      // if (newPost != null && newPost.length > 0) {
+      //   for (int i = 0; i < newPost.length; i++) {
+      //     UserModel result =
+      //         await _memberRepository.getUserDataRemote(newPost[i].userId);
+      //     newPost[i].user = result;
+      //   }
+      // }
     } catch (e) {
       print(">>> error: $e");
     }
@@ -125,6 +132,8 @@ class HomeViewModel extends MultipleStreamViewModel {
   @override
   Map<String, StreamData> get streamsMap => {
         StreamKey.authStatus: StreamData<bool>(_memberRepository.isLogin),
+        StreamKey.dataChanged:
+            StreamData<UserModel>(_memberRepository.isDataChanged),
         StreamKey.postAdded: StreamData<bool>(_postRepository.isPostAdded),
         StreamKey.connectivity:
             StreamData<ConnectivityStatus>(_connectivityService.status),
@@ -136,16 +145,13 @@ class HomeViewModel extends MultipleStreamViewModel {
     if (key == StreamKey.connectivity) {
       if (data == ConnectivityStatus.Offline) isNetworkError = true;
     } else if (key == StreamKey.authStatus) {
-      if (data && username == null) {
+      if (data && user == null) {
         getUserData();
-      } else if (!data && username != null) {
-        username = null;
-        notifyListeners();
       }
     } else if (key == StreamKey.postAdded) {
       if (data) {
         _postRepository.setPostAdded(false);
-        firstLoad();
+        getNewPosts();
       }
     }
   }

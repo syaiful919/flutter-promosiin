@@ -38,13 +38,17 @@ class UserPostViewModel extends StreamViewModel {
     if (pageContext == null && context != null) pageContext = context;
     if (userId == null && id != null) userId = id;
     if (user == null && usr != null) user = usr;
-    runBusyFuture(getUserId());
+    print(user.username);
+    await runBusyFuture(getUserId());
     runBusyFuture(getUserPost());
     isNetworkError = false;
   }
 
   Future<void> getUserId() async {
     currentUserId = _memberRepository.getUserId();
+
+    print(">>> current user from repo $currentUserId");
+    print(">>> current user from passing $userId");
     if (currentUserId == userId) {
       appBarTitle = "My Post";
     } else {
@@ -58,6 +62,11 @@ class UserPostViewModel extends StreamViewModel {
     try {
       List<PostModel> result = await _postRepository.getPostByUserId(userId);
       posts = result;
+      // if (posts != null && posts.length > 0) {
+      //   for (int i = 0; i < posts.length; i++) {
+      //     posts[i].user = user;
+      //   }
+      // }
     } catch (e) {
       print(">>> error: $e");
     }

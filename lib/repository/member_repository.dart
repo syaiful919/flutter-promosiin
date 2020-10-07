@@ -17,6 +17,8 @@ class MemberRepository {
   final UsersCollection _collection = UsersCollection();
 
   final BehaviorSubject<bool> _authController = BehaviorSubject<bool>();
+  final BehaviorSubject<UserModel> _userController =
+      BehaviorSubject<UserModel>();
 
   MemberRepository() {
     _authController.add(false);
@@ -24,6 +26,9 @@ class MemberRepository {
 
   void setIsLogin(bool val) => _authController.sink.add(val);
   Stream<bool> get isLogin => _authController.stream;
+
+  void setDataStream(UserModel val) => _userController.sink.add(val);
+  Stream<UserModel> get isDataChanged => _userController.stream;
 
   Future<AuthResponseModel> login(LoginRequestModel loginRequest) async {
     AuthResponseModel authResult = await _authService.signIn(
@@ -49,11 +54,16 @@ class MemberRepository {
     return authResult;
   }
 
+  Future<void> editUser(String userId, UserModel user) async {
+    _collection.createUser(id: userId, user: user);
+  }
+
   Future<UserModel> getUserDataRemote(String id) =>
       _collection.getUserById(id: id);
 
   Future<void> logOut() async {
     await _authService.signOut();
+    setDataStream(null);
     removeUserId();
     removeUserData();
     setIsLogin(false);

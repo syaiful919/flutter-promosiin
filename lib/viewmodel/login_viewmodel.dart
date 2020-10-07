@@ -56,6 +56,7 @@ class LoginViewModel extends BaseViewModel {
       UserModel result =
           await _memberRepository.getUserDataRemote(response.userId);
       _memberRepository.saveUserData(result);
+      _memberRepository.setDataStream(result);
 
       _memberRepository.setIsLogin(true);
       _navigationService.pushNamedAndRemoveUntil(Routes.mainPage);

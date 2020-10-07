@@ -60,6 +60,7 @@ class _LinkDialogState extends State<LinkDialog> {
             SizedBox(height: Gap.m),
             BaseInput(
               controller: titleController,
+              placeHolder: "Nama situs",
               onChanged: (_) {
                 setState(() {});
               },
@@ -67,6 +68,7 @@ class _LinkDialogState extends State<LinkDialog> {
             SizedBox(height: Gap.s),
             BaseInput(
               controller: urlController,
+              placeHolder: "link url",
               onChanged: (_) {
                 setState(() {});
               },

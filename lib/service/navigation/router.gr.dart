@@ -18,6 +18,7 @@ import 'package:base_project/model/entity/category_model.dart';
 import 'package:base_project/model/entity/promotion_model.dart';
 import 'package:base_project/ui/pages/user_post_page/user_post_page.dart';
 import 'package:base_project/model/entity/user_model.dart';
+import 'package:base_project/ui/pages/edit_profile_page/edit_profile_page.dart';
 import 'package:base_project/ui/pages/no_internet_page/no_internet_page.dart';
 import 'package:base_project/ui/pages/in_app_webview_page/in_app_webview_page.dart';
 import 'package:base_project/ui/pages/widget_experiment_page/widget_experiment_page.dart';
@@ -30,6 +31,7 @@ abstract class Routes {
   static const postDetailPage = '/post-detail-page';
   static const categoryPage = '/category-page';
   static const userPostPage = '/user-post-page';
+  static const editProfilePage = '/edit-profile-page';
   static const noInternetPage = '/no-internet-page';
   static const inAppWebviewPage = '/in-app-webview-page';
   static const widgetExperimentPage = '/widget-experiment-page';
@@ -41,6 +43,7 @@ abstract class Routes {
     postDetailPage,
     categoryPage,
     userPostPage,
+    editProfilePage,
     noInternetPage,
     inAppWebviewPage,
     widgetExperimentPage,
@@ -124,6 +127,18 @@ class Router extends RouterBase {
               user: typedArgs.user),
           settings: settings,
         );
+      case Routes.editProfilePage:
+        if (hasInvalidArgs<EditProfilePageArguments>(args, isRequired: true)) {
+          return misTypedArgsRoute<EditProfilePageArguments>(args);
+        }
+        final typedArgs = args as EditProfilePageArguments;
+        return MaterialPageRoute<dynamic>(
+          builder: (context) => EditProfilePage(
+              key: typedArgs.key,
+              user: typedArgs.user,
+              userId: typedArgs.userId),
+          settings: settings,
+        );
       case Routes.noInternetPage:
         if (hasInvalidArgs<NoInternetPageArguments>(args, isRequired: true)) {
           return misTypedArgsRoute<NoInternetPageArguments>(args);
@@ -193,6 +208,15 @@ class UserPostPageArguments {
   final String userId;
   final UserModel user;
   UserPostPageArguments({this.key, @required this.userId, this.user});
+}
+
+//EditProfilePage arguments holder class
+class EditProfilePageArguments {
+  final Key key;
+  final UserModel user;
+  final String userId;
+  EditProfilePageArguments(
+      {this.key, @required this.user, @required this.userId});
 }
 
 //NoInternetPage arguments holder class

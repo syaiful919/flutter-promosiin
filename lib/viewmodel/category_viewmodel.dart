@@ -5,6 +5,7 @@ import 'package:base_project/model/entity/category_model.dart';
 import 'package:base_project/model/entity/post_model.dart';
 import 'package:base_project/model/entity/promotion_model.dart';
 import 'package:base_project/model/entity/user_model.dart';
+import 'package:base_project/repository/member_repository.dart';
 import 'package:base_project/repository/post_repository.dart';
 import 'package:base_project/service/connectivity/connectivity_service.dart';
 import 'package:base_project/service/navigation/navigation_service.dart';
@@ -16,6 +17,7 @@ class CategoryViewModel extends StreamViewModel {
   final _navigationService = locator<NavigationService>();
   final _connectivityService = locator<ConnectivityService>();
   final _postRepository = locator<PostRepository>();
+  final _memberRepository = locator<MemberRepository>();
 
   BuildContext pageContext;
 
@@ -46,9 +48,13 @@ class CategoryViewModel extends StreamViewModel {
       List<PostModel> result =
           await _postRepository.getPostByCategory(category.categoryId);
       posts = result;
-      posts.forEach((element) {
-        print(element.title);
-      });
+      if (posts != null && posts.length > 0) {
+        for (int i = 0; i < posts.length; i++) {
+          UserModel result =
+              await _memberRepository.getUserDataRemote(posts[i].userId);
+          posts[i].user = result;
+        }
+      }
     } catch (e) {
       print(">>> error: $e");
     }
@@ -59,9 +65,13 @@ class CategoryViewModel extends StreamViewModel {
       List<PostModel> result =
           await _postRepository.getPostByTag(promotion.name);
       posts = result;
-      posts.forEach((element) {
-        print(element.title);
-      });
+      // if (posts != null && posts.length > 0) {
+      //   for (int i = 0; i < posts.length; i++) {
+      //     UserModel result =
+      //         await _memberRepository.getUserDataRemote(posts[i].userId);
+      //     posts[i].user = result;
+      //   }
+      // }
     } catch (e) {
       print(">>> error: $e");
     }

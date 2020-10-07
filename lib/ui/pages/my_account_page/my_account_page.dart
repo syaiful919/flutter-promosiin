@@ -34,9 +34,20 @@ class MyAccountPage extends StatelessWidget {
                   height: 100,
                   alignment: Alignment.center,
                   child: ClipOval(
-                      child: (model.user?.profilePicture == null)
-                          ? Image.asset(ProjectImages.avatar)
-                          : Image.network(model.user.profilePicture)),
+                    child: (model.user?.profilePicture == null)
+                        ? Image.asset(ProjectImages.avatar)
+                        : Stack(
+                            children: <Widget>[
+                              Image.asset(ProjectImages.avatar),
+                              Image.network(
+                                model.user.profilePicture,
+                                fit: BoxFit.cover,
+                                height: 100,
+                                width: 100,
+                              ),
+                            ],
+                          ),
+                  ),
                 ),
                 SizedBox(height: Gap.s),
                 if (model.user != null)
@@ -49,14 +60,16 @@ class MyAccountPage extends StatelessWidget {
                 ListItem(
                   title: "Edit Profile",
                   iconPath: ProjectIcons.edit,
-                  onTap: () {
-                    Flushbar(
-                      duration: Duration(milliseconds: 3000),
-                      flushbarPosition: FlushbarPosition.TOP,
-                      backgroundColor: ProjectColor.red3,
-                      message: "Sorry, this feature isn't available right now",
-                    )..show(context);
-                  },
+                  onTap: () => model.goToEditProfilePage()
+                  //     () {
+                  //   Flushbar(
+                  //     duration: Duration(milliseconds: 3000),
+                  //     flushbarPosition: FlushbarPosition.TOP,
+                  //     backgroundColor: ProjectColor.red3,
+                  //     message: "Sorry, this feature isn't available right now",
+                  //   )..show(context);
+                  // }
+                  ,
                 ),
                 ListItem(
                   title: "My Post",

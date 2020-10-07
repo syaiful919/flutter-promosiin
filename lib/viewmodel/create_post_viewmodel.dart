@@ -178,20 +178,30 @@ class CreatePostViewModel extends BaseViewModel {
   }
 
   void addLink(ExternalLink val) {
+    if (links == null) links = [];
+
     links.add(val);
     notifyListeners();
   }
 
   void openCamera() async {
-    image = await _imagePicker.getImageFromCamera();
-    // if (image != null) imagePath = image.path;
-    notifyListeners();
+    try {
+      image = await _imagePicker.getImageFromCamera();
+      // if (image != null) imagePath = image.path;
+      notifyListeners();
+    } catch (e) {
+      print(">>> error $e");
+    }
   }
 
   void openGallery() async {
-    image = await _imagePicker.getImageFromGallery();
-    // if (image != null) imagePath = image.path;
-    notifyListeners();
+    try {
+      image = await _imagePicker.getImageFromGallery();
+      // if (image != null) imagePath = image.path;
+      notifyListeners();
+    } catch (e) {
+      print(">>> error $e");
+    }
   }
 
   bool isDataValid() =>
@@ -199,6 +209,7 @@ class CreatePostViewModel extends BaseViewModel {
       (description != null && description.isNotEmpty) &&
       (location != null && location.isNotEmpty) &&
       category != null &&
+      links != null &&
       links.length > 0 &&
       (image != null || networkImagePath != null);
 

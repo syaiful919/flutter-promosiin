@@ -79,20 +79,26 @@ class CreatePostPage extends HookWidget {
                           color: ProjectColor.main,
                         ),
                       ),
-                      alignment: Alignment.center,
+                      // alignment: Alignment.center,
                       child: (model.networkImagePath != null)
-                          ? Image.network(model.networkImagePath)
+                          ? Image.network(model.networkImagePath,
+                              fit: BoxFit.cover)
                           : (model.image == null)
-                              ? Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                    SizedBox(height: Gap.xl),
-                                    Image.asset(ProjectImages.images),
-                                    SizedBox(height: Gap.xl),
-                                    Text("Pilih gambar"),
-                                  ],
+                              ? Center(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      SizedBox(height: Gap.xl),
+                                      Image.asset(ProjectImages.images),
+                                      SizedBox(height: Gap.xl),
+                                      Text("Pilih gambar"),
+                                    ],
+                                  ),
                                 )
-                              : Image.file(model.image),
+                              : Image.file(
+                                  model.image,
+                                  fit: BoxFit.cover,
+                                ),
                     ),
                   ),
                 ),
@@ -176,8 +182,9 @@ class CreatePostPage extends HookWidget {
                     )
                   ],
                 ),
-                if (model.links.length > 0) SizedBox(height: Gap.s),
-                if (model.links.length > 0)
+                if (model.links != null && model.links.length > 0)
+                  SizedBox(height: Gap.s),
+                if (model.links != null && model.links.length > 0)
                   ListView.builder(
                     shrinkWrap: true,
                     itemBuilder: (_, index) => LinkListItem(

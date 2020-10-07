@@ -38,6 +38,7 @@ class PostCard extends StatelessWidget {
                       image: post.user.profilePicture == null
                           ? AssetImage(ProjectImages.avatar)
                           : NetworkImage(post.user.profilePicture),
+                      fit: BoxFit.cover,
                     ),
                   ),
                   margin: EdgeInsets.only(right: Gap.s),
@@ -74,27 +75,15 @@ class PostCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(Gap.l),
             child: AspectRatio(
               aspectRatio: 1,
-              child: Stack(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => detailAction(post),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: Image.network(
-                        post.imagePath,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+              child: GestureDetector(
+                onTap: () => detailAction(post),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Image.network(
+                    post.imagePath,
+                    fit: BoxFit.cover,
                   ),
-                  // Positioned(
-                  //   bottom: Gap.m,
-                  //   right: Gap.m,
-                  //   child: GestureDetector(
-                  //     onTap: () => saveAction(post),
-                  //     child: Icon(Icons.favorite),
-                  //   ),
-                  // )
-                ],
+                ),
               ),
             ),
           ),

@@ -28,7 +28,7 @@ class PostsCollection {
     try {
       var result = await postsCollection
           .orderBy("date_created", descending: true)
-          // .limit(limit)
+          .limit(limit)
           .get();
       List<PostModel> posts = [];
       result.docs.forEach((element) {
@@ -46,10 +46,8 @@ class PostsCollection {
     @required QueryDocumentSnapshot lastDoc,
   }) async {
     try {
-      var result = await postsCollection
-          .startAfterDocument(lastDoc)
-          // .limit(limit)
-          .get();
+      var result =
+          await postsCollection.startAfterDocument(lastDoc).limit(limit).get();
       print(result.docs[0].data());
     } catch (e) {
       print(">>> error: $e");

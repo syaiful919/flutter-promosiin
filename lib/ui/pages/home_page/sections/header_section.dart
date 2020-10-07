@@ -20,7 +20,7 @@ class Header extends ViewModelWidget<HomeViewModel> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "Selamat datang ${model.username?.capitalize() ?? ''}",
+            "Selamat datang ${model.user?.username?.getFirstWord()?.capitalize() ?? ''}",
             style: TypoStyle.head600,
           ),
           Text(
