@@ -5,7 +5,7 @@ class LocalNotificationService {
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  String groupKey = 'com.syaiful.base_project.WORK_EMAIL';
+  String groupKey = 'com.syaiful.promosiin.WORK_EMAIL';
   String groupChannelId = 'grouped channel id';
   String groupChannelName = 'grouped channel name';
   String groupChannelDescription = 'grouped channel description';

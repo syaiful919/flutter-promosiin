@@ -28,9 +28,17 @@ dependencies:
   url_launcher: ^5.5.0
   connectivity: ^0.4.9+2
   flutter_inappwebview: ^4.0.0+4
+  image_picker: ^0.6.7+7
+  uuid: ^2.2.2
+  animations: ^1.1.1
+
+  # FIREBASE
   firebase_messaging: ^7.0.0
   flutter_local_notifications: ^1.4.4+4
-  image_picker: ^0.6.7+7
+  firebase_storage: ^4.0.0
+  firebase_auth: ^0.18.0+1
+  cloud_firestore: ^0.14.0+2
+  firebase_core: ^0.5.0
 
   # UI
   flutter_svg: ^0.17.4
@@ -39,16 +47,17 @@ dependencies:
   video_player: ^0.10.12+2
   chewie: ^0.9.10
   youtube_player_flutter: ^7.0.0+7
-  
+  carousel_slider: ^2.2.1
+  flushbar: ^1.10.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   # run: flutter pub run build_runner build --delete-conflicting-outputs
-  build_runner: 
-  auto_route_generator: 
-  injectable_generator: 
+  build_runner: null
+  auto_route_generator: null
+  injectable_generator: null
 
   flutter_launcher_icons: ^0.7.5
   flutter_native_splash: ^0.1.9
@@ -64,7 +73,7 @@ flutter_icons:
 # splash screen generator
 # run: flutter pub pub run flutter_native_splash:create
 flutter_native_splash:
-  image: assets/logo/logo_transparent.png
+  image: assets/logo/splash.png
   color: "#ffffff"
   fill: false
   android_disable_fullscreen: true
@@ -78,7 +87,6 @@ flutter:
     - assets/images/
     - assets/logo/
     - assets/videos/
-
 
   fonts:
     - family: Poppins

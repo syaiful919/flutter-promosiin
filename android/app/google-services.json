@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "367182913646",
-    "firebase_url": "https://flutter-base-919ae.firebaseio.com",
-    "project_id": "flutter-base-919ae",
-    "storage_bucket": "flutter-base-919ae.appspot.com"
+    "project_number": "68601961098",
+    "firebase_url": "https://promosiin-46092.firebaseio.com",
+    "project_id": "promosiin-46092",
+    "storage_bucket": "promosiin-46092.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:367182913646:android:f80e3f3b9b014fb11e067f",
+        "mobilesdk_app_id": "1:68601961098:android:dd2846650d6dcdf22c6b73",
         "android_client_info": {
-          "package_name": "com.syaiful.base_project"
+          "package_name": "com.syaiful.promosiin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "367182913646-udkl04ptk82q9pfe4sol7j57eqj2qkv6.apps.googleusercontent.com",
+          "client_id": "68601961098-6nhq6msjp2qlulka2alnsp1f4cnrnvhe.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyATghijJDyAQVQNuuBeI-7QM8t4vQp5u7I"
+          "current_key": "AIzaSyASQmbGyDsIaZh2WnKMVN1uyG07j_zXDLA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "367182913646-udkl04ptk82q9pfe4sol7j57eqj2qkv6.apps.googleusercontent.com",
+              "client_id": "68601961098-6nhq6msjp2qlulka2alnsp1f4cnrnvhe.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

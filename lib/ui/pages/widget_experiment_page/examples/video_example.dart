@@ -56,7 +56,7 @@ class _VideoExampleState extends State<VideoExample> {
               alignment: Alignment.centerLeft,
               child: Text(
                 "Video Example",
-                style: TypoStyle.sectionLabel,
+                style: TypoStyle.title,
               )),
           SizedBox(height: Gap.s),
           Chewie(
